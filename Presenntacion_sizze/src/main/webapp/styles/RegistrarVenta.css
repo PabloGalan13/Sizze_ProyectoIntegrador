@@ -1,0 +1,135 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 26 mar 2025, 14:16:07
+    Author     : Paco
+*/
+
+body {
+    margin: 0;
+    font-family: serif;
+    background: linear-gradient(to right, #fdf497, #fd5949, #d6249f, #285AEB);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: #000;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .container {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: white;
+    margin: 2rem;
+    border-radius: 10px;
+  }
+  
+  .venta, .productos {
+    flex: 1 1 45%;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    display: block;
+    margin: 0.5rem 0 0.25rem;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+  
+  .metodos-pago {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .metodo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .metodo img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .descuento button {
+    background-color: #fff0b3;
+    border: none;
+    padding: 0.5rem;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .pagar {
+    background: linear-gradient(to right, #fcd9d9, #fcb8ff);
+    border: none;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .productos {
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    padding-left: 1rem;
+  }
+  
+  .producto {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .producto img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  
+  .info {
+    flex-grow: 1;
+  }
+  
+  .eliminar {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #900;
+  }
+  
+  .total {
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  

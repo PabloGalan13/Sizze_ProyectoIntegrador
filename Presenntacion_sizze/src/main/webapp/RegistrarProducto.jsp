@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrar Producto</title>
-        <link rel="stylesheet" href="RegistrarProducto.css"> 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/RegistrarProducto.css"> 
         <script type="text/javascript">
             function actualizarTipo() {
                 var categoria = document.getElementById('categoria').value;
