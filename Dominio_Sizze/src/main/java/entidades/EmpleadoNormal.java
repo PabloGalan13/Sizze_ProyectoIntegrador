@@ -18,5 +18,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "empleados_normales")
 public class EmpleadoNormal extends Empleado implements Serializable {
+
+    public EmpleadoNormal() {
+    }
+
+    public EmpleadoNormal(String nombre, String apellido, String rfc, String contrasena, Horario horario) {
+        super(nombre, apellido, rfc, contrasena, horario);
+    }
     
 }

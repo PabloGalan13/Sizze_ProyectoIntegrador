@@ -8,18 +8,22 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author USER
  */
 @Entity
+@Table(name = "horarios")
 public class Horario implements Serializable {
 
     @Id
@@ -29,7 +33,8 @@ public class Horario implements Serializable {
     @Column(name = "dias")
     private List<DayOfWeek> dias;
     
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "empleado_id")
     private Empleado empleado;
     
     @Column(name = "hora_entrada")

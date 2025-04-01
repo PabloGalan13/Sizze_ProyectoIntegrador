@@ -6,41 +6,54 @@ package entidades;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author USER
  */
 @Entity
+@Table(name = "detalle_ventas")
 public class DetalleVenta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "fecha")
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
-    @Column(name = "precio_vendido")
+    
+    @Column(name = "precio_vendido", nullable = false)
     private double precioVendido;
-    @Column(name = "cantidad")
+    
+    @Column(name = "cantidad", nullable = false)
     private int cantidad;
+    
     @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "venta_id", nullable = false)
+    private Venta venta;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(LocalDate fecha, double precioVendido, int cantidad, Producto producto) {
+    public DetalleVenta(LocalDate fecha, double precioVendido, int cantidad, Producto producto, Venta venta) {
         this.fecha = fecha;
         this.precioVendido = precioVendido;
         this.cantidad = cantidad;
         this.producto = producto;
+        this.venta = venta;
     }
 
     public Long getId() {
@@ -82,5 +95,15 @@ public class DetalleVenta implements Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+    
+    
     
 }

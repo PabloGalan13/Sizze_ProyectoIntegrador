@@ -5,6 +5,7 @@
 package entidades;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "empleados")
 public abstract class Empleado implements Serializable {
 
     @Id
@@ -39,7 +42,8 @@ public abstract class Empleado implements Serializable {
     @Column(name = "contrasena", nullable = false, length = 100)
     private String contrasena;
     
-    @OneToOne(mappedBy = "empleado")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "horario_id", referencedColumnName = "id")
     private Horario horario;
 
     public Empleado() {

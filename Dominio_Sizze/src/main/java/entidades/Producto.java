@@ -5,33 +5,42 @@
 package entidades;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author USER
  */
 @Entity
+@Table(name = "productos")
 public class Producto implements Serializable {
 
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
-    @Column(name = "descripcion")
+    
+    @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
-    @Column(name = "precio")
+    
+    @Column(name = "precio", nullable = false)
     private double precio;
-    @Column(name = "stock")
+    
+    @Column(name = "stock", nullable = false)
     private int stock;
-    @ManyToOne
+    
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     public Producto() {

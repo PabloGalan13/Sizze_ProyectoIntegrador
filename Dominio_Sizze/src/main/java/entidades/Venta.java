@@ -7,6 +7,7 @@ package entidades;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,28 +15,40 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author USER
  */
 @Entity
+@Table(name = "ventas")
 public class Venta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;;
+    private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "vendedor_id", nullable = false)
     private Empleado vendedor;
-    @Column(name = "fecha")
+    
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
+    
+    @Column(name = "total", nullable = false)
+    private double total;
+    
     @Enumerated(EnumType.STRING)
-    @Column(name = "metodo_pago")
+    @Column(name = "metodo_pago", nullable = false)
     private MetodoPago metodoPago;
-    @OneToMany(mappedBy = "venta")
+    
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleVenta> productos;
 
     public Venta(Empleado vendedor, LocalDate fecha, MetodoPago metodoPago, List<DetalleVenta> productos) {
@@ -44,6 +57,10 @@ public class Venta implements Serializable {
         this.metodoPago = metodoPago;
         this.productos = productos;
     }
+
+    public Venta() {
+    }
+    
 
     public Long getId() {
         return id;
