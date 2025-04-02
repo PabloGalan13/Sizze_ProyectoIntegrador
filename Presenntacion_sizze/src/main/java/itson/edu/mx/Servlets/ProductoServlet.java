@@ -11,6 +11,7 @@ import excepciones.ExcepcionAT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,11 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 @WebServlet(name = "ProductoServlet", urlPatterns = {"/ProductoServlet"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB antes de escribir en disco
+        maxFileSize = 1024 * 1024 * 10, // Tamaño máximo de archivo 10MB
+        maxRequestSize = 1024 * 1024 * 50 // Tamaño máximo de la petición 50MB
+)
 public class ProductoServlet extends HttpServlet {
 
     /**
@@ -94,36 +100,36 @@ public class ProductoServlet extends HttpServlet {
             ProductoDAO productoDAO = new ProductoDAO();
 
             boolean guardado = productoDAO.registrarProducto(producto);
-//            Part filePart = request.getPart("imgPortada");
-//            String fileName = filePart.getSubmittedFileName();
-//
-//            // Ruta para guardar la imagen
-//            String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
-//
-//            // Crear la carpeta si no existe
-//            File uploadDir = new File(uploadPath);
-//            if (!uploadDir.exists()) {
-//                if (uploadDir.mkdirs()) {
-//                    System.out.println("Directorio creado: " + uploadPath);
-//                } else {
-//                    System.out.println("No se pudo crear el directorio: " + uploadPath);
-//                }
-//            }
-//
-//            // Generar un nombre único para la imagen
-//            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
-//
-//            // Guardar la imagen en la carpeta
-//            String filePath = uploadPath + File.separator + uniqueFileName;
-//            try {
-//                filePart.write(filePath);
-//                System.out.println("Archivo guardado en: " + filePath);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println("Error al guardar el archivo: " + e.getMessage());
-//            }
-//            // Guardar la ruta relativa para la base de datos
-//            String imagen = "postImgs/" + uniqueFileName;
+            Part filePart = request.getPart("imgPortada");
+            String fileName = filePart.getSubmittedFileName();
+
+            // Ruta para guardar la imagen
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
+
+            // Crear la carpeta si no existe
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                if (uploadDir.mkdirs()) {
+                    System.out.println("Directorio creado: " + uploadPath);
+                } else {
+                    System.out.println("No se pudo crear el directorio: " + uploadPath);
+                }
+            }
+
+            // Generar un nombre único para la imagen
+            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+
+            // Guardar la imagen en la carpeta
+            String filePath = uploadPath + File.separator + uniqueFileName;
+            try {
+                filePart.write(filePath);
+                System.out.println("Archivo guardado en: " + filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error al guardar el archivo: " + e.getMessage());
+            }
+            // Guardar la ruta relativa para la base de datos
+            String imagen = "postImgs/" + uniqueFileName;
 
             if (guardado) {
                 response.sendRedirect("RegistrarProducto.jsp?mensaje=exito");

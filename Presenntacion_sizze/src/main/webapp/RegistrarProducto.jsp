@@ -37,8 +37,6 @@
             }
             window.onload = function () {
                 actualizarTipo();
-
-                // Obtener parámetros de la URL
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.has('mensaje')) {
                     let mensaje = urlParams.get('mensaje');
@@ -108,13 +106,13 @@
 
                 if (!nombre || !cantidad || !talla || !costo || !tipo || !categoria || imagen === 0) {
                     alert('Por favor, completa todos los campos antes de continuar.');
-                    event.preventDefault(); // Evita el envío del formulario
+                    event.preventDefault();
                 }
             });
         </script>
     </head>
     <body>     
-        <form action="ProductoServlet" method="post">
+        <form action="ProductoServlet" method="post" enctype="multipart/form-data">
 
             <div class="RegistrarProducto">
 
@@ -161,10 +159,10 @@
                     </div> 
                 </div>
                 <div class="buttons">
-                        <button type="button" class="cancelar" onclick="document.querySelector('form').reset();
-                                actualizarPlaceholder();">Cancelar</button>
-                        <button class="confirmar">Confirmar</button>
-                    </div>
+                    <button type="button" class="cancelar" onclick="document.querySelector('form').reset();
+                            actualizarPlaceholder();">Cancelar</button>
+                    <button class="confirmar">Confirmar</button>
+                </div>
             </div>
         </form>
 

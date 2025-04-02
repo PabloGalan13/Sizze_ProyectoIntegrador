@@ -79,9 +79,9 @@ body {
 .buttons {
     width: 100%;
     display: flex;
-    justify-content: center; /* Centrar los botones */
+    justify-content: center;
     align-items: center;
-    gap: 20px; /* Separación entre botones */
+    gap: 20px; 
     margin-top: 20px;
 }
 
