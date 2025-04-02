@@ -15,6 +15,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,17 +83,47 @@ public class ProductoServlet extends HttpServlet {
         try {
             String nombre = request.getParameter("nombre");
             String tipo = request.getParameter("tipo");
-            String descripcion = request.getParameter("descripcion");
+            String descripcion = request.getParameter("talla");
             double precio = Double.parseDouble(request.getParameter("precio"));
             int stock = Integer.parseInt(request.getParameter("stock"));
             String categoriaNombre = request.getParameter("categoria");
 
             Categoria categoria = new Categoria();
             categoria.setNombre(categoriaNombre);
-            Producto producto = new Producto(nombre, descripcion, precio, stock, categoria, tipo);
+            Producto producto = new Producto(descripcion, nombre, precio, stock, categoria, tipo);
             ProductoDAO productoDAO = new ProductoDAO();
 
             boolean guardado = productoDAO.registrarProducto(producto);
+//            Part filePart = request.getPart("imgPortada");
+//            String fileName = filePart.getSubmittedFileName();
+//
+//            // Ruta para guardar la imagen
+//            String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
+//
+//            // Crear la carpeta si no existe
+//            File uploadDir = new File(uploadPath);
+//            if (!uploadDir.exists()) {
+//                if (uploadDir.mkdirs()) {
+//                    System.out.println("Directorio creado: " + uploadPath);
+//                } else {
+//                    System.out.println("No se pudo crear el directorio: " + uploadPath);
+//                }
+//            }
+//
+//            // Generar un nombre único para la imagen
+//            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+//
+//            // Guardar la imagen en la carpeta
+//            String filePath = uploadPath + File.separator + uniqueFileName;
+//            try {
+//                filePart.write(filePath);
+//                System.out.println("Archivo guardado en: " + filePath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                System.out.println("Error al guardar el archivo: " + e.getMessage());
+//            }
+//            // Guardar la ruta relativa para la base de datos
+//            String imagen = "postImgs/" + uniqueFileName;
 
             if (guardado) {
                 response.sendRedirect("RegistrarProducto.jsp?mensaje=exito");
@@ -100,15 +133,15 @@ public class ProductoServlet extends HttpServlet {
         } catch (ExcepcionAT ex) {
             Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -35,7 +35,20 @@
 
                 actualizarPlaceholder();
             }
+            window.onload = function () {
+                actualizarTipo();
 
+                // Obtener parámetros de la URL
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('mensaje')) {
+                    let mensaje = urlParams.get('mensaje');
+                    if (mensaje === 'exito') {
+                        alert('Producto registrado exitosamente.');
+                    } else if (mensaje === 'error') {
+                        alert('Hubo un error al registrar el producto. Inténtalo de nuevo.');
+                    }
+                }
+            };
             function actualizarPlaceholder() {
                 var categoria = document.getElementById('categoria').value;
                 var tipo = document.getElementById('tipo').value;
@@ -84,11 +97,26 @@
             window.onload = function () {
                 actualizarTipo();
             };
+            document.querySelector('.confirmar').addEventListener('click', function (event) {
+                var nombre = document.getElementById('nombre').value.trim();
+                var cantidad = document.getElementById('cantidad').value.trim();
+                var talla = document.getElementById('talla').value.trim();
+                var costo = document.getElementById('costo').value.trim();
+                var tipo = document.getElementById('tipo').value.trim();
+                var categoria = document.getElementById('categoria').value.trim();
+                var imagen = document.getElementById('imgPortada').files.length;
+
+                if (!nombre || !cantidad || !talla || !costo || !tipo || !categoria || imagen === 0) {
+                    alert('Por favor, completa todos los campos antes de continuar.');
+                    event.preventDefault(); // Evita el envío del formulario
+                }
+            });
         </script>
     </head>
-    <body>
-        <div class="RegistrarProducto">
-            <form action="ProductoServlet" method="post">
+    <body>     
+        <form action="ProductoServlet" method="post">
+
+            <div class="RegistrarProducto">
 
                 <h2>Registrar Producto</h2>
                 <div class="container">
@@ -100,16 +128,16 @@
 
                     <div class="field-group">
                         <label for="categoria">Categoría</label>
-                        <select id="categoria" onchange="actualizarTipo()">
-                            <option selected>Ropa</option>
-                            <option>Micas</option>
-                            <option>Accesorios</option>
+                        <select id="categoria" name="categoria" onchange="actualizarTipo()">
+                            <option value="Ropa" selected>Ropa</option>
+                            <option value="Micas">Micas</option>
+                            <option value="Accesorios">Accesorios</option>
                         </select>
                     </div>
 
                     <div class="field-group">
                         <label for="tipo">Tipo</label>
-                        <select id="tipo" onchange="actualizarPlaceholder()">
+                        <select id="tipo" name="tipo" onchange="actualizarPlaceholder()">
                         </select>
                     </div>
 
@@ -127,12 +155,18 @@
                         <label for="costo">Costo</label>
                         <input type="text" id="costo" name="precio" placeholder="Ej: 200.00">
                     </div>
-                    <div class="buttons">
-                        <button class="cancelar">Cancelar</button>
+                    <div class="imgs-post">
+                        <label for="imgPortada">Producto:</label>
+                        <input type="file" id="imgPortada" name="imgPortada" accept="image/*" required>
+                    </div> 
+                </div>
+                <div class="buttons">
+                        <button type="button" class="cancelar" onclick="document.querySelector('form').reset();
+                                actualizarPlaceholder();">Cancelar</button>
                         <button class="confirmar">Confirmar</button>
                     </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
+
     </body>
 </html>

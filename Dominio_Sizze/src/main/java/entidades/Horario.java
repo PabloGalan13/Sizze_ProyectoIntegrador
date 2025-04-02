@@ -6,7 +6,10 @@ package entidades;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +20,6 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
-
 
 /**
  *
@@ -30,17 +32,19 @@ public class Horario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @ElementCollection(targetClass = DayOfWeek.class)
+    @Enumerated(EnumType.STRING)
     @Column(name = "dias")
     private List<DayOfWeek> dias;
-    
-    @OneToOne (cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "empleado_id")
     private Empleado empleado;
-    
+
     @Column(name = "hora_entrada")
     private LocalTime horaEntrada;
-    
+
     @Column(name = "hora_salida")
     private LocalTime horaSalida;
 
@@ -93,6 +97,5 @@ public class Horario implements Serializable {
     public void setHoraSalida(LocalTime horaSalida) {
         this.horaSalida = horaSalida;
     }
-    
-    
+
 }
