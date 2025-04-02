@@ -33,9 +33,15 @@ public class Producto implements Serializable {
 
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
+    
+    @Column(name = "imagen", nullable = true, length = 255)
+    private String imagen;
 
     @Column(name = "precio", nullable = false)
     private double precio;
+    
+    @Column(name = "talla_modelo", nullable = false)
+    private String tallaModelo;
 
     @Column(name = "stock", nullable = false)
     private int stock;
@@ -50,13 +56,25 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precio, int stock, Categoria categoria, String tipo) {
+    public Producto(String nombre, String descripcion, String imagen, double precio, String tallaModelo, int stock, String tipo, Categoria categoria) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.precio = precio;
+        this.tallaModelo = tallaModelo;
+        this.stock = stock;
+        this.tipo = tipo;
+        this.categoria = categoria;
+    }
+
+    public Producto(String nombre, String descripcion, double precio, String tallaModelo, int stock, String tipo, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.tallaModelo = tallaModelo;
         this.stock = stock;
-        this.categoria = categoria;
         this.tipo = tipo;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -115,4 +133,21 @@ public class Producto implements Serializable {
         this.tipo = tipo;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getTallaModelo() {
+        return tallaModelo;
+    }
+
+    public void setTallaModelo(String tallaModelo) {
+        this.tallaModelo = tallaModelo;
+    }
+
+    
 }

@@ -11,8 +11,8 @@
             <h2>Consultar Inventario</h2>
 
             <div class="search-bar">
-                <input type="text" placeholder="🔍 Nombre o Código SKU">
-                <button class="filter-btn">⚙️</button>
+                <input type="text" id="search-input" placeholder="🔍 Nombre o Código SKU">
+                <button class="filter-btn" onclick="fetchInventario()">⚙️</button>
             </div>
 
             <table>
@@ -26,31 +26,8 @@
                         <th>Precio</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Funda Antigolpes</td>
-                        <td>📱</td>
-                        <td>IA100</td>
-                        <td>Fundas</td>
-                        <td>25</td>
-                        <td>$150</td>
-                    </tr>
-                    <tr>
-                        <td>Camiseta Casual</td>
-                        <td>👕</td>
-                        <td>CC200</td>
-                        <td>Ropa</td>
-                        <td>40</td>
-                        <td>$300</td>
-                    </tr>
-                    <tr>
-                        <td>Mica Templada HD</td>
-                        <td>🛡️</td>
-                        <td>MT300</td>
-                        <td>Micas</td>
-                        <td>35</td>
-                        <td>$100</td>
-                    </tr>
+                <tbody id="tabla-inventario">
+                    <!-- Los datos se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
 
@@ -60,5 +37,7 @@
                 <button class="btn imprimir">🖨️ Imprimir</button>
             </div>
         </div>
+        <!-- Enlazamos el archivo JS -->
+        <script src="${pageContext.request.contextPath}/js/ConsultarInventario.js"></script>
     </body>
 </html>

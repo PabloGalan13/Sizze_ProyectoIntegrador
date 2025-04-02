@@ -4,27 +4,27 @@
  */
 package itson.edu.mx.Servlets;
 
-import daos.ProductoDAO;
-import entidades.Categoria;
+import com.mysql.cj.xdevapi.JsonArray;
 import entidades.Producto;
+import jakarta.json.JsonObject;
+import com.google.gson.Gson;
+import daos.ProductoDAO;
 import excepciones.ExcepcionAT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  *
- * @author Gabriel
+ * @author USER
  */
-@WebServlet(name = "ProductoServlet", urlPatterns = {"/ProductoServlet"})
-public class ProductoServlet extends HttpServlet {
+public class ConsultarInventario extends HttpServlet {
 
+    private final ProductoDAO productoDAO = new ProductoDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +42,10 @@ public class ProductoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductoServlet</title>");
+            out.println("<title>Servlet ConsultarInventario</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ConsultarInventario at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +63,22 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        try {
+            List<Producto> productos = productoDAO.obtenerProductos();
+            Gson gson = new Gson();
+            String json = gson.toJson(productos);
+            out.print(json);
+        } catch (ExcepcionAT e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.print("{\"error\": \"Error al obtener productos\"}");
+            e.printStackTrace();
+        } finally {
+            out.flush();
+        }
     }
 
     /**
@@ -77,38 +92,16 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        try {
-//            String nombre = request.getParameter("nombre");
-//            String tipo = request.getParameter("tipo");
-//            String descripcion = request.getParameter("descripcion");
-//            double precio = Double.parseDouble(request.getParameter("precio"));
-//            int stock = Integer.parseInt(request.getParameter("stock"));
-//            String categoriaNombre = request.getParameter("categoria");
-//
-//            Categoria categoria = new Categoria();
-//            categoria.setNombre(categoriaNombre);
-//            Producto producto = new Producto(nombre, descripcion, precio, stock, categoria, tipo);
-//            ProductoDAO productoDAO = new ProductoDAO();
-//
-//            boolean guardado = productoDAO.registrarProducto(producto);
-//
-//            if (guardado) {
-//                response.sendRedirect("RegistrarProducto.jsp?mensaje=exito");
-//            } else {
-//                response.sendRedirect("RegistrarProducto.jsp?mensaje=error");
-//            }
-//        } catch (ExcepcionAT ex) {
-//            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-}
+        processRequest(request, response);
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

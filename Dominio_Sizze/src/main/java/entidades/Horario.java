@@ -6,6 +6,7 @@ package entidades;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,8 +32,9 @@ public class Horario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @ElementCollection
     @Column(name = "dias")
-    private List<DayOfWeek> dias;
+    private List<String> dias;
     
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "empleado_id")
@@ -44,7 +46,7 @@ public class Horario implements Serializable {
     @Column(name = "hora_salida")
     private LocalTime horaSalida;
 
-    public Horario(List<DayOfWeek> dias, Empleado empleado, LocalTime horaEntrada, LocalTime horaSalida) {
+    public Horario(List<String> dias, Empleado empleado, LocalTime horaEntrada, LocalTime horaSalida) {
         this.dias = dias;
         this.empleado = empleado;
         this.horaEntrada = horaEntrada;
@@ -62,11 +64,11 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    public List<DayOfWeek> getDias() {
+    public List<String> getDias() {
         return dias;
     }
 
-    public void setDias(List<DayOfWeek> dias) {
+    public void setDias(List<String> dias) {
         this.dias = dias;
     }
 
