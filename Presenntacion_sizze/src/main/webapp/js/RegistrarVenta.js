@@ -1,8 +1,8 @@
-<%-- 
-    Document   : RegistrarVenta
-    Created on : 26 mar 2025, 14:15:26
-    Author     : Paco
---%>
+/* 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
+ */
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,4 +52,3 @@
     <script src="${pageContext.request.contextPath}/js/RegistrarVenta.js"></script>
 </body>
 </html>
-
