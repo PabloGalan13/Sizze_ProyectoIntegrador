@@ -15,7 +15,7 @@
             function actualizarTipo() {
                 var categoria = document.getElementById('categoria').value;
                 var tipoSelect = document.getElementById('tipo');
-                tipoSelect.innerHTML = ''; 
+                tipoSelect.innerHTML = '';
                 var opciones = [];
 
                 if (categoria === 'Ropa') {
@@ -82,55 +82,57 @@
             }
 
             window.onload = function () {
-                actualizarTipo(); 
+                actualizarTipo();
             };
         </script>
     </head>
     <body>
         <div class="RegistrarProducto">
-            <h2>Registrar Producto</h2>
-            <div class="container">
+            <form action="ProductoServlet" method="post">
 
-                <div class="field-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" placeholder="Ej: Producto">
+                <h2>Registrar Producto</h2>
+                <div class="container">
+
+                    <div class="field-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Producto">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" onchange="actualizarTipo()">
+                            <option selected>Ropa</option>
+                            <option>Micas</option>
+                            <option>Accesorios</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" onchange="actualizarPlaceholder()">
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" name="stock" placeholder="Ej: 10">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="talla">Talla/Modelo</label>
+                        <input type="text" id="talla" name="talla" placeholder="Ej: M, L, XL">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="costo">Costo</label>
+                        <input type="text" id="costo" name="precio" placeholder="Ej: 200.00">
+                    </div>
+                    <div class="buttons">
+                        <button class="cancelar">Cancelar</button>
+                        <button class="confirmar">Confirmar</button>
+                    </div>
                 </div>
-
-                <div class="field-group">
-                    <label for="categoria">Categoría</label>
-                    <select id="categoria" onchange="actualizarTipo()">
-                        <option selected>Ropa</option>
-                        <option>Micas</option>
-                        <option>Accesorios</option>
-                    </select>
-                </div>
-
-                <div class="field-group">
-                    <label for="tipo">Tipo</label>
-                    <select id="tipo" onchange="actualizarPlaceholder()">
-                    </select>
-                </div>
-
-                <div class="field-group">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" id="cantidad" placeholder="Ej: 10">
-                </div>
-
-                <div class="field-group">
-                    <label for="talla">Talla/Modelo</label>
-                    <input type="text" id="talla" placeholder="Ej: M, L, XL">
-                </div>
-
-                <div class="field-group">
-                    <label for="costo">Costo</label>
-                    <input type="text" id="costo" placeholder="Ej: 200.00">
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button class="cancelar">Cancelar</button>
-                <button class="confirmar">Confirmar</button>
-            </div>
+            </form>
         </div>
     </body>
 </html>

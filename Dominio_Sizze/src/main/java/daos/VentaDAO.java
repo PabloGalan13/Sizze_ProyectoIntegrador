@@ -3,11 +3,12 @@ package daos;
 import entidades.Venta;
 import excepciones.ExcepcionAT;
 import interfacesDAO.IVentaDAO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+
 
 public class VentaDAO implements IVentaDAO {
     

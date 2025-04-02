@@ -3,11 +3,12 @@ package daos;
 import entidades.Producto;
 import excepciones.ExcepcionAT;
 import interfacesDAO.IProductoDAO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+
 
 public class ProductoDAO implements IProductoDAO {
     
@@ -18,13 +19,14 @@ public class ProductoDAO implements IProductoDAO {
     }
     
     @Override
-    public void registrarProducto(Producto producto) throws ExcepcionAT {
+    public boolean registrarProducto(Producto producto) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(producto);
             em.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

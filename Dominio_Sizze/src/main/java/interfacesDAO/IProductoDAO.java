@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IProductoDAO {
     
-    void registrarProducto(Producto producto) throws ExcepcionAT;
+    boolean registrarProducto(Producto producto) throws ExcepcionAT;
     
     void actualizarProducto(Producto producto) throws ExcepcionAT;
     

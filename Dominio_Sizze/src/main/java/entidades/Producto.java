@@ -4,16 +4,17 @@
  */
 package entidades;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 
 /**
  *
@@ -23,22 +24,25 @@ import javax.persistence.Table;
 @Table(name = "productos")
 public class Producto implements Serializable {
 
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
-    
+
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
-    
+
     @Column(name = "precio", nullable = false)
     private double precio;
-    
+
     @Column(name = "stock", nullable = false)
     private int stock;
-    
+
+    @Column(name = "tipo", nullable = false, length = 50)
+    private String tipo;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
@@ -46,12 +50,13 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precio, int stock, Categoria categoria) {
+    public Producto(String nombre, String descripcion, double precio, int stock, Categoria categoria, String tipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
         this.categoria = categoria;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -100,6 +105,14 @@ public class Producto implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
 }

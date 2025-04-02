@@ -42,7 +42,7 @@ public class InsertarDatos {
             categoriaDAO.registrarCategoria(categoria);
             System.out.println("Categoría registrada exitosamente.");
 
-            Producto producto = new Producto("Smartphone", "Teléfono móvil de última generación", 499.99, 20, categoria);
+            Producto producto = new Producto("Smartphone", "Teléfono móvil de última generación", 499.99, 20,categoria,"telefono");
             productoDAO.registrarProducto(producto);
             System.out.println("Producto registrado exitosamente.");
 
