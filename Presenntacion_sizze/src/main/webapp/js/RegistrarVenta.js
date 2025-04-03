@@ -4,51 +4,73 @@
  */
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Realizar Venta</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/RegistrarVenta.css">
-</head>
-<body>
-    <div class="container">
-        <div class="venta">
-            <h2>Realizar Venta</h2>
-            
-            <label for="buscarProducto">Buscar Producto:</label>
-            <input type="text" id="buscarProducto" list="listaProductos" placeholder="Nombre o Código SKU">
-            <datalist id="listaProductos"></datalist>
+document.addEventListener("DOMContentLoaded", function () {
+    cargarListaProductos();
+    configurarEventos();
+});
 
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" placeholder="Cantidad del Producto a Vender">
+function cargarListaProductos() {
+    fetch("ObtenerProductosServlet") // Ajusta la URL según tu configuración
+        .then(response => response.json())
+        .then(productos => {
+            let listaProductos = document.getElementById("listaProductos");
+            listaProductos.innerHTML = ""; // Limpiar antes de cargar nuevos
+            productos.forEach(producto => {
+                let option = document.createElement("option");
+                option.value = producto.nombre; // Mostrar nombre del producto
+                option.dataset.id = producto.id;
+                option.dataset.precio = producto.precio;
+                listaProductos.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error al cargar productos:", error));
+}
 
-            <h3>Métodos de Pago</h3>
-            <div class="metodos-pago">
-                <label class="metodo">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/cash-in-hand.png"/>
-                    <input type="checkbox" checked> Efectivo
-                </label>
-                <label class="metodo">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/bank-card-back-side.png"/>
-                    <input type="checkbox"> Transferencia
-                </label>
-            </div>
+function configurarEventos() {
+    document.getElementById("buscarProducto").addEventListener("change", agregarProducto);
+}
 
-            <button class="pagar">Pagar Productos</button>
-        </div>
+function agregarProducto() {
+    let inputProducto = document.getElementById("buscarProducto");
+    let cantidad = document.getElementById("cantidad").value;
 
-        <div class="productos">
-            <h2>Productos</h2>
-            <div id="listaProductosAgregados"></div>
-            <div class="total">
-                <strong>Total a pagar: $<span id="totalPago">0.00</span> MXN</strong>
-            </div>
-        </div>
-    </div>
+    if (!cantidad || cantidad <= 0) {
+        alert("Por favor, ingresa una cantidad válida.");
+        return;
+    }
 
-    <script src="${pageContext.request.contextPath}/js/RegistrarVenta.js"></script>
-</body>
-</html>
+    let selectedOption = Array.from(document.getElementById("listaProductos").options)
+        .find(option => option.value === inputProducto.value);
+
+    if (!selectedOption) {
+        alert("Producto no encontrado.");
+        return;
+    }
+
+    let productoId = selectedOption.dataset.id;
+    let productoNombre = selectedOption.value;
+    let precio = parseFloat(selectedOption.dataset.precio);
+    let total = precio * cantidad;
+
+    let divProductos = document.querySelector(".productos");
+    
+    let productoDiv = document.createElement("div");
+    productoDiv.classList.add("producto");
+    productoDiv.innerHTML = `
+        <p><strong>${productoNombre}</strong> - $${precio.toFixed(2)}</p>
+        <p>Cantidad: ${cantidad}</p>
+        <p>Total: $${total.toFixed(2)}</p>
+        <button class="eliminar">✖</button>
+    `;
+
+    divProductos.appendChild(productoDiv);
+
+    // Limpiar campos
+    inputProducto.value = "";
+    document.getElementById("cantidad").value = "";
+
+    // Evento para eliminar el producto
+    productoDiv.querySelector(".eliminar").addEventListener("click", function () {
+        productoDiv.remove();
+    });
+}

@@ -52,4 +52,3 @@
     <script src="${pageContext.request.contextPath}/js/RegistrarVenta.js"></script>
 </body>
 </html>
-
