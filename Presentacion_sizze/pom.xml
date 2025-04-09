@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>itson.edu.mx</groupId>
-    <artifactId>Presenntacion_sizze</artifactId>
+    <artifactId>Presentacion_sizze</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>Presenntacion_sizze-1.0</name>
+    <name>Presentacion_sizze-1.0</name>
     
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
