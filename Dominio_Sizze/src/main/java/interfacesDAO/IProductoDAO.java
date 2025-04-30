@@ -14,5 +14,7 @@ public interface IProductoDAO {
     
     Producto obtenerProductoPorNombre(String nombre) throws ExcepcionAT;
     
+    Producto obtenerProductoPorId(long id) throws ExcepcionAT;
+    
     List<Producto> obtenerProductos() throws ExcepcionAT;
 }
