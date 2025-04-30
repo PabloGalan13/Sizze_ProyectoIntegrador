@@ -1,3 +1,5 @@
-itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.class
 itson\edu\mx\presenntacion_sizze\resources\JakartaEE91Resource.class
+itson\edu\mx\Servlets\BuscarProducto.class
+itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.class
+itson\edu\mx\Servlets\RegistrarVenta.class
 itson\edu\mx\Servlets\ProductoServlet.class

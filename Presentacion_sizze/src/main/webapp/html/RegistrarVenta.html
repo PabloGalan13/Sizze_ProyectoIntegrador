@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Realizar Venta</title>
-    <link rel="stylesheet" href="./styles/RegistrarVenta.css">
+    <link rel="stylesheet" href="../styles/RegistrarVenta.css">
 </head>
 <body>
     <div class="container">
@@ -14,41 +14,43 @@
             <div class="busqueda-producto">
                 <label for="buscarProducto">Buscar Producto:</label>
                 <div class="busqueda-input">
-                    <input type="text" id="buscarProducto" placeholder="Nombre o Código SKU">
+                    <input type="text" id="buscarProducto" placeholder="Nombre del producto">
                     <button id="btnBuscar">Buscar</button>
                 </div>
                 <div id="resultadosBusqueda" class="resultados-busqueda"></div>
             </div>
 
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" min="1" value="1" placeholder="Cantidad del Producto a Vender">
+            <div class="cantidad-container">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" min="1" value="1">
+            </div>
 
             <button id="agregarProducto" class="agregar-btn">Agregar Producto</button>
 
-            <h3>Métodos de Pago</h3>
+            <h3>Método de Pago</h3>
             <div class="metodos-pago">
                 <label class="metodo">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/cash-in-hand.png"/>
-                    <input type="radio" name="metodoPago" value="efectivo" checked> Efectivo
+                    <input type="radio" name="metodoPago" value="EFECTIVO" checked>
+                    <span>Efectivo</span>
                 </label>
                 <label class="metodo">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/bank-card-back-side.png"/>
-                    <input type="radio" name="metodoPago" value="transferencia"> Transferencia
+                    <input type="radio" name="metodoPago" value="TRANSFERENCIA">
+                    <span>Transferencia</span>
                 </label>
             </div>
 
-            <button id="pagar" class="pagar">Pagar Productos</button>
+            <button id="pagar" class="pagar-btn">Registrar Venta</button>
         </div>
 
         <div class="productos">
-            <h2>Productos en Venta</h2>
+            <h2>Productos Seleccionados</h2>
             <div id="listaProductosAgregados" class="lista-productos"></div>
             <div class="total">
-                <strong>Total a pagar: $<span id="totalPago">0.00</span> MXN</strong>
+                <strong>Total: $<span id="totalPago">0.00</span></strong>
             </div>
         </div>
     </div>
 
-    <script src="./js/RegistrarVenta.js"></script>
+    <script src="../javascript/RegistroVenta.js"></script>
 </body>
 </html>
