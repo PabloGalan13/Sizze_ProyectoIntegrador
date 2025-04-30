@@ -15,7 +15,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
-
 /**
  *
  * @author USER
@@ -34,6 +33,9 @@ public class Producto implements Serializable {
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
+    @Column(name = "modeloTalla", nullable = false, length = 50)
+    private String modeloTalla;
+
     @Column(name = "precio", nullable = false)
     private double precio;
 
@@ -43,20 +45,25 @@ public class Producto implements Serializable {
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
+
+    @ManyToOne()
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precio, int stock, Categoria categoria, String tipo) {
+    public Producto(String nombre, String descripcion, String modeloTalla, double precio, int stock, Categoria categoria, String tipo, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.modeloTalla = modeloTalla;
         this.precio = precio;
         this.stock = stock;
         this.categoria = categoria;
         this.tipo = tipo;
+        this.imagen = imagen;
     }
 
     public Long getId() {
@@ -113,6 +120,14 @@ public class Producto implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
 }
