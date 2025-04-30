@@ -9,15 +9,14 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
-
 public class CategoriaDAO implements ICategoriaDAO {
-    
+
     private final EntityManagerFactory emf;
-    
+
     public CategoriaDAO() {
         emf = Persistence.createEntityManagerFactory("SizzePU");
     }
-    
+
     @Override
     public void registrarCategoria(Categoria categoria) throws ExcepcionAT {
         EntityManager em = null;
@@ -37,7 +36,7 @@ public class CategoriaDAO implements ICategoriaDAO {
             }
         }
     }
-    
+
     @Override
     public void actualizarCategoria(Categoria categoria) throws ExcepcionAT {
         EntityManager em = null;
@@ -57,7 +56,7 @@ public class CategoriaDAO implements ICategoriaDAO {
             }
         }
     }
-    
+
     @Override
     public void eliminarCategoria(Categoria categoria) throws ExcepcionAT {
         EntityManager em = null;
@@ -78,7 +77,7 @@ public class CategoriaDAO implements ICategoriaDAO {
             }
         }
     }
-    
+
     @Override
     public Categoria obtenerCategoriaPorId(Long id) throws ExcepcionAT {
         EntityManager em = null;
@@ -93,7 +92,26 @@ public class CategoriaDAO implements ICategoriaDAO {
             }
         }
     }
-    
+
+    @Override
+    public Categoria obtenerCategoriaPorNombre(String nombre) throws ExcepcionAT {
+        EntityManager em = null;
+
+        try {
+            em = emf.createEntityManager();
+            TypedQuery<Categoria> query = em.createQuery(
+                    "SELECT c FROM Categoria c WHERE c.nombre = :nombre", Categoria.class);
+            query.setParameter("nombre", nombre);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw new ExcepcionAT("No se encontró la categoría con nombre: " + nombre, e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     @Override
     public List<Categoria> obtenerCategorias() throws ExcepcionAT {
         EntityManager em = null;
