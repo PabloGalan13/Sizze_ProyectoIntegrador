@@ -24,6 +24,11 @@ class ProductoForm {
         document.querySelector('.confirmar').addEventListener('click', e => this.validarFormulario(e));
         document.querySelector('.cancelar').addEventListener('click', () => this.resetFormulario());
 
+        // Validar solo números en costo
+        this.costo.addEventListener('input', () => {
+            this.costo.value = this.costo.value.replace(/[^0-9.]/g, '');
+        });
+
         this.mostrarMensaje();
     }
 
@@ -108,21 +113,21 @@ class ProductoForm {
     }
 
     mostrarMensaje() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('mensaje')) {
-        const mensaje = params.get('mensaje');
-        if (mensaje === 'exito') {
-            alert('Producto registrado exitosamente.');
-        } else if (mensaje === 'error') {
-            alert('Hubo un error al registrar el producto. Inténtalo de nuevo.');
-        }
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('mensaje')) {
+            const mensaje = params.get('mensaje');
+            if (mensaje === 'exito') {
+                alert('Producto registrado exitosamente.');
+            } else if (mensaje === 'error') {
+                alert('Hubo un error al registrar el producto. Inténtalo de nuevo.');
+            }
 
-        // ❌ Quitar el parámetro 'mensaje' de la URL
-        params.delete('mensaje');
-        const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
-        window.history.replaceState({}, '', nuevaURL);
+            // ❌ Quitar el parámetro 'mensaje' de la URL
+            params.delete('mensaje');
+            const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            window.history.replaceState({}, '', nuevaURL);
+        }
     }
-}
 }
 
 window.addEventListener('load', () => new ProductoForm());
