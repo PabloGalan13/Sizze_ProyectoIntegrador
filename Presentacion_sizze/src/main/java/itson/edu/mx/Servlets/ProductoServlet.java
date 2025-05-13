@@ -93,6 +93,7 @@ public class ProductoServlet extends HttpServlet {
             double precio = Double.parseDouble(request.getParameter("precio"));
             int stock = Integer.parseInt(request.getParameter("stock"));
             String categoriaNombre = request.getParameter("categoria");
+            String modelo = request.getParameter("modelo");
 
             Categoria categoria = new Categoria();
             categoria.setNombre(categoriaNombre);
@@ -128,7 +129,7 @@ public class ProductoServlet extends HttpServlet {
             // Guardar la ruta relativa para la base de datos
             String imagen = "postImgs/" + uniqueFileName;
             
-            Producto producto = new Producto(descripcion, nombre, precio, stock, categoria, tipo, imagen);
+            Producto producto = new Producto(descripcion, nombre, modelo, precio, stock, categoria, tipo, imagen);
             ProductoDAO productoDAO = new ProductoDAO();
 
             boolean guardado = productoDAO.registrarProducto(producto);
