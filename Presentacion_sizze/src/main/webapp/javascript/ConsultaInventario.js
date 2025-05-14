@@ -115,4 +115,3 @@ function ocultarMensajeError() {
     const alertaError = document.getElementById('mensajeError');
     alertaError.classList.add('d-none');
 }
-

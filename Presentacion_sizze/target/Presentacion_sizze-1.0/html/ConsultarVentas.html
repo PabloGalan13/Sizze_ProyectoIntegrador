@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Consultar Ventas</title>
+        <link rel="stylesheet" href="../styles/ConsultaVenta.css">
+    </head>
+    <body>
+        <div class="ConsultarVentas">
+            <h2>Consultar Ventas</h2>
+
+            <div class="search-bar">
+                <div class="input-wrapper">
+                    <label for="fechaInicio">Fecha inicio</label>
+                    <input type="date" id="fechaInicio" class="form-control" placeholder="Ingrese fecha de inicio">
+                </div>
+                <div class="input-wrapper">
+                    <label for="fechaFin">Fecha fin</label>
+                    <input type="date" id="fechaFin" class="form-control" placeholder="Ingrese fecha de fin">
+                </div>
+                <button class="btn btn-primary" id="botonBuscar">Buscar</button>
+            </div>
+
+
+
+            <div class="alert alert-danger d-none" id="mensajeError">
+                Productos no encontrados
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID Venta</th>
+                            <th>Empleado</th>
+                            <th>Fecha</th>
+                            <th>Total Generado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaVentas">
+                        <!-- Aquí se cargarán los productos dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-container">
+                <button class="btn regresar">Regresar</button>
+                <button class="btn descargar">📊 Descargar</button>
+                <button class="btn imprimir">🖨️ Imprimir</button>
+            </div>
+        </div>
+        <script src="../javascript/ConsultaVenta.js" defer></script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Venta</title>
+    <link rel="stylesheet" href="../styles/DetalleVenta.css">
+</head>
+<body>
+    <div class="venta-container">
+        <div class="DetalleVenta">
+            <h2 class="titulo">Registro de Venta</h2>
+
+            <section class="datos-venta">
+                <h3>Datos de Venta</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>ID de Venta</label>
+                        <input type="text" value="4878787213213821738" readonly>
+                    </div>
+                    <div class="info-item">
+                        <label>Empleado</label>
+                        <input type="text" value="Juan Pérez" readonly>
+                    </div>
+                    <div class="info-item">
+                        <label>Fecha:</label>
+                        <input type="text" value="10/12/2025" readonly>
+                    </div>
+                    <div class="info-item">
+                        <label>Método de Pago</label>
+                        <input type="text" value="Tarjeta de Crédito" readonly>
+                    </div>
+                </div>
+            </section>
+
+            <section class="productos-vendidos">
+                <h3>Productos Vendidos</h3>
+                <div class="tabla-productos">
+                    <div class="fila encabezado">
+                        <div>Producto</div>
+                        <div>Cantidad</div>
+                        <div>Precio</div>
+                        <div>Total</div>
+                    </div>
+                    <div class="fila">
+                        <div>Funda iPhone 13</div>
+                        <div><input type="text" value="4" readonly></div>
+                        <div><input type="text" value="120" readonly></div>
+                        <div><input type="text" value="480" readonly></div>
+                    </div>
+                </div>
+
+                <div class="total-final">
+                    <label>Total</label>
+                    <input type="text" value="480" readonly>
+                </div>
+            </section>
+
+            <div class="boton-regresar">
+                <button class="btn-regresar">Regresar</button>
+            </div>
+        </div>
+    </div>
+    <script src="../javascript/DetalleVenta.js" defer></script>
+</body>
+</html>
