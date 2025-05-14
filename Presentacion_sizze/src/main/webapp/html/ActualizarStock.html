@@ -26,6 +26,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <main class="ActualizarStock">
             <button class="volver"><i class="fas fa-arrow-left"></i></button>
             <h2>Actualizar Productos</h2>
+            <div class="search-bar">
+                <div class="input-group">
+                    <input type="text" id="busquedaProducto" class="form-control" placeholder="Ingrese nombre del producto">
+                    <button class="boton-pastel" style="align-items:center" id="botonBuscar">Buscar</button>
+                </div>
+            </div>
             <div id="contenedorProductos">
             </div>
         </main>
@@ -62,7 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <!-- Modal de confirmación -->
         <div id="modalConfirmacion" class="modal hidden">
             <div class="modal-content">
-                <p>¿Estás seguro de actualizar el stock de <strong id="confirmNombre"></strong> a <strong id="confirmCantidad"></strong> unidades?</p>
+                <p>¿Estás seguro de actualizar el producto  <strong id="confirmNombre"></strong> y su stock a <strong id="confirmCantidad"></strong> unidades?</p>
                 <div class="buttons" style="justify-content: center; gap: 30px; margin-top: 20px;">
                     <button id="confirmarCambios" class="boton-pastel">Sí, actualizar</button>
                     <button id="cancelarCambios" class="boton-pastel">Cancelar</button>
@@ -73,7 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div id="modalExito" class="modal hidden">
             <div class="modal-content">
                 <i class="fas fa-check-circle" style="font-size: 48px; color: #4BB543;"></i>
-                <h3>¡Stock actualizado con éxito!</h3>
+                <h3>¡Producto y stock actualizado con éxito!</h3>
                 <button id="cerrarExito" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
             </div>
         </div>
@@ -82,7 +88,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="modal-content">
                 <i class="fas fa-times-circle" style="font-size: 48px; color: #e74c3c;"></i>
                 <h3>¡Error!</h3>
-                <p id="mensajeError">Ocurrió un problema al actualizar el stock.</p>
+                <p id="mensajeError">Ocurrió un problema al actualizar el producto y stock.</p>
                 <button id="cerrarError" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
             </div>
         </div>

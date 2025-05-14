@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const contenedorProductos = document.getElementById("contenedorProductos");
+    const botonBuscar = document.getElementById('botonBuscar');
+    if (botonBuscar) {
+        botonBuscar.addEventListener('click', clickBotonBuscar);
+    }
 
     // Modales y elementos
     const modal = document.getElementById("modalProducto");
@@ -41,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const APP_CONTEXT = window.location.pathname.split('/')[1];
     const BASE_URL = `${window.location.origin}/${APP_CONTEXT}`;
+    document.getElementById("botonBuscar").addEventListener("click", clickBotonBuscar);
 
     fetch(`${BASE_URL}/ConsultaInventario`, {
         method: 'GET',
@@ -76,6 +81,83 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Error al cargar productos:", err);
                 mostrarError("No se pudieron cargar los productos.");
             });
+
+    async function clickBotonBuscar() {
+        const nombreProducto = document.getElementById('busquedaProducto').value.trim();
+
+        contenedorProductos.innerHTML = ''; // Siempre limpiamos primero
+
+        if (!nombreProducto) {
+            // Si no hay texto, volvemos a cargar todos los productos con GET
+            try {
+                const res = await fetch(`${BASE_URL}/ConsultaInventario`, {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'}
+                });
+
+                if (!res.ok)
+                    throw new Error('Error al recargar productos');
+
+                const productos = await res.json();
+
+                if (!productos || productos.length === 0) {
+                    mostrarError('No hay productos disponibles');
+                    return;
+                }
+
+                productos.forEach(crearElementoProducto);
+            } catch (error) {
+                console.error("Error al recargar productos:", error);
+                mostrarError("No se pudieron recargar los productos.");
+            }
+
+            return; // Fin de la función si estaba vacío
+        }
+
+        // Si sí hay texto, se hace búsqueda POST
+        try {
+            const response = await fetch(`${BASE_URL}/ConsultaInventario`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({nombreProducto})
+            });
+
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+
+            const productos = await response.json();
+
+            if (!productos || productos.length === 0) {
+                mostrarError('Producto no encontrado');
+                return;
+            }
+
+            productos.forEach(crearElementoProducto);
+        } catch (error) {
+            console.error('Error al buscar productos:', error);
+            mostrarError('Error al buscar productos. Por favor, intente nuevamente.');
+        }
+    }
+    function crearElementoProducto(prod) {
+        const div = document.createElement("div");
+        div.className = "producto";
+        const imagenUrl = `${BASE_URL}/${prod.imagen}`;
+        div.innerHTML = `<img src="${imagenUrl}" alt="${prod.nombre}"><a href="#">${prod.nombre}</a>`;
+        div.addEventListener("click", () => {
+            modalImg.src = imagenUrl;
+            modalInputImg.value = "";
+            modalNombreInput.value = prod.nombre;
+            modalDescInput.value = prod.descripcion || "";
+            cantidad = prod.stock;
+            cantidadSpan.textContent = cantidad;
+            productoSeleccionado = prod;
+            modal.classList.remove("hidden");
+        });
+        contenedorProductos.appendChild(div);
+    }
 
 
     btnSumar.addEventListener("click", () => {

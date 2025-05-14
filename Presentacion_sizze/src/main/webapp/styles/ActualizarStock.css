@@ -40,7 +40,7 @@ body {
     color: #81486c;
     transform: scale(1.2);
 }
-    
+
 
 h1 {
     margin: 0; /* Asegura que no haya margen extra */
@@ -90,21 +90,12 @@ h2 {
     color: #81486c; /* Combina con el color del producto seleccionado */
 }
 
-
 .producto {
     display: flex;
     align-items: center;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 15px;
-}
-.producto:hover {
-    background-color: #81486c;
-    color: white;
-}
-
-.producto:hover a {
-    color: white;
 }
 
 .producto img {
@@ -119,13 +110,6 @@ h2 {
     text-decoration: underline;
 }
 
-.producto.seleccionado {
-    background-color: #81486c;
-}
-
-.producto.seleccionado a {
-    color: white;
-}
 .modal {
     position: fixed;
     top: 0;
@@ -215,10 +199,46 @@ h2 {
 }
 
 #contenedorProductos {
-    max-height: calc(100vh - 280px); /* Ajusta según el espacio ocupado por el header y márgenes */
+    max-height: calc(100vh - 340px); /* Ajusta según el espacio ocupado por el header y márgenes */
     overflow-y: auto;
     padding-right: 10px; /* espacio para que no tape el scroll */
     border: 1px solid #ccc; /* opcional, solo para visualizar límites */
     border-radius: 10px;
 }
 
+/* Estilo de la barra de búsqueda */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 600px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    text-align: center;
+    font-style: italic;
+    color: gray;
+}
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+.input-group button {
+    white-space: nowrap;
+}
