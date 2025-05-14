@@ -1,0 +1,200 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 13 may 2025, 9:06:14 p.m.
+    Author     : Gabriel
+*/
+
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: white;
+    padding-top: 70px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.menu {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+h1 {
+    margin: 0; /* Asegura que no haya margen extra */
+    padding-left: 10px; /* Espacio entre el menú y el título */
+    flex-grow: 1; /* Esto permite que el título ocupe el espacio restante */
+}
+
+.profile-icon {
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+    color: #81486c;
+}
+
+.ActualizarStock {
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 90px; /* Da espacio al contenido debajo del header */
+}
+
+h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.volver {
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333; /* Asegura buen contraste */
+    font-weight: bold; /* Más grueso */
+    transition: transform 0.2s ease;
+}
+
+.volver:hover {
+    transform: scale(1.2); /* Efecto visual al pasar el cursor */
+    color: #81486c; /* Combina con el color del producto seleccionado */
+}
+
+
+.producto {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+.producto:hover {
+    background-color: #81486c;
+    color: white;
+}
+
+.producto:hover a {
+    color: white;
+}
+
+.producto img {
+    width: 80px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.producto a {
+    font-size: 18px;
+    color: black;
+    text-decoration: underline;
+}
+
+.producto.seleccionado {
+    background-color: #81486c;
+}
+
+.producto.seleccionado a {
+    color: white;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.cantidad-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.cantidad-control button {
+    padding: 8px 14px;
+    font-size: 18px;
+}
+
+.actualizar {
+    background-color: #81486c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.actualizar:hover {
+    background-color: #5f3650;
+}
+.boton-pastel {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 15px;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.boton-pastel:hover {
+    opacity: 0.8;
+}
+

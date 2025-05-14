@@ -4,11 +4,11 @@
  */
 package itson.edu.mx.Servlets;
 
+import com.google.gson.Gson;
 import daos.CategoriaDAO;
 import daos.ProductoDAO;
 import entidades.Categoria;
 import entidades.Producto;
-import excepciones.ExcepcionAT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +17,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import excepciones.ExcepcionAT;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.util.UUID;
@@ -96,7 +98,7 @@ public class ProductoServlet extends HttpServlet {
             String categoriaNombre = request.getParameter("categoria");
 
             Categoria categoria = new CategoriaDAO().obtenerCategoriaPorNombre(categoriaNombre);
-            
+
             Part filePart = request.getPart("imgPortada");
             String fileName = filePart.getSubmittedFileName();
 
@@ -127,8 +129,8 @@ public class ProductoServlet extends HttpServlet {
             }
             // Guardar la ruta relativa para la base de datos
             String imagen = "postImgs/" + uniqueFileName;
-            
-            Producto producto = new Producto(nombre, descripcion,descripcion , precio, stock, categoria, tipo, imagen);
+
+            Producto producto = new Producto(nombre, descripcion, descripcion, precio, stock, categoria, tipo, imagen);
             ProductoDAO productoDAO = new ProductoDAO();
 
             boolean guardado = productoDAO.registrarProducto(producto);
@@ -138,8 +140,10 @@ public class ProductoServlet extends HttpServlet {
             } else {
                 response.sendRedirect("html/RegistroProducto.html?mensaje=error");
             }
+
         } catch (ExcepcionAT ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductoServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

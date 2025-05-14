@@ -1,0 +1,102 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 13 may 2025, 9:58:53 p.m.
+    Author     : Gabriel
+*/
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to right, #ffdd99, #ff99cc);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to right, #ffdd99, #ff99cc);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.menu, .profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.ConfirmarStock {
+  background: white;
+  padding: 30px;
+  width: 500px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.volver {
+  position: absolute;
+  top: 80px;
+  left: 30px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.producto-box {
+  background: #81486c;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 30px;
+  color: white;
+}
+
+.producto-box img {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.producto-box p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.buttons button {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  border-radius: 15px;
+  background: linear-gradient(to right, #ffdd99, #ff99cc);
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+

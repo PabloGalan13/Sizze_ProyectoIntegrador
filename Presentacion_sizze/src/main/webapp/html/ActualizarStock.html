@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actualizar Stock</title>
+        <link rel="stylesheet" href="../styles/ActualizarStock.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="menu">&#9776;</div>
+            <h1>SIZZE</h1>
+            <div class="profile-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </header>
+
+        <main class="ActualizarStock">
+            <button class="volver"><i class="fas fa-arrow-left"></i></button>
+            <h2>Productos</h2>
+            <div id="contenedorProductos">
+            </div>
+        </main>
+        <!-- Modal de edición -->
+        <div id="modalProducto" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="modalImg" src="" alt="Producto">
+                <h3 id="modalNombre"></h3>
+                <p id="modalDesc"></p>
+
+                <div class="cantidad-control">
+                    <button id="btnRestar" class="boton-pastel">-</button>
+                    <span id="cantidad">0</span>
+                    <button id="btnSumar" class="boton-pastel">+</button>
+                </div>
+
+                <button id="btnActualizar" class="boton-pastel">Actualizar</button>
+            </div>
+        </div>
+
+        <!-- Modal de confirmación -->
+        <div id="modalConfirmacion" class="modal hidden">
+            <div class="modal-content">
+                <p>¿Estás seguro de actualizar el stock de <strong id="confirmNombre"></strong> a <strong id="confirmCantidad"></strong> unidades?</p>
+                <div class="buttons" style="justify-content: center; gap: 30px; margin-top: 20px;">
+                    <button id="confirmarCambios" class="boton-pastel">Sí, actualizar</button>
+                    <button id="cancelarCambios" class="boton-pastel">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de éxito -->
+        <div id="modalExito" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: #4BB543;"></i>
+                <h3>¡Stock actualizado con éxito!</h3>
+                <button id="cerrarExito" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
+        <!-- Modal de error -->
+        <div id="modalError" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-times-circle" style="font-size: 48px; color: #e74c3c;"></i>
+                <h3>¡Error!</h3>
+                <p id="mensajeError">Ocurrió un problema al actualizar el stock.</p>
+                <button id="cerrarError" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
+        <script src="../javascript/ActualizarStock.js" defer></script>
+    </body>
+</html>
+
+
+

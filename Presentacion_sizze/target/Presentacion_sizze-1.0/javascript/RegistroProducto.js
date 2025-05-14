@@ -24,10 +24,6 @@ class ProductoForm {
         document.querySelector('.confirmar').addEventListener('click', e => this.validarFormulario(e));
         document.querySelector('.cancelar').addEventListener('click', () => this.resetFormulario());
 
-        // Validar solo números en costo
-        this.costo.addEventListener('input', () => {
-            this.costo.value = this.costo.value.replace(/[^0-9.]/g, '');
-        });
 
         this.mostrarMensaje();
     }
@@ -104,6 +100,14 @@ class ProductoForm {
         if (!nombre || !cantidad || !talla || !costo || !tipo || !categoria || !imagenCargada) {
             alert('Por favor, completa todos los campos antes de continuar.');
             event.preventDefault();
+            return;
+        }
+
+        // ✅ Aquí va la validación de números
+        if (!/^\d+(\.\d{1,2})?$/.test(costo)) {
+            alert('No se permiten letras en el campo Costo. Solo números (puedes usar punto decimal).');
+            event.preventDefault();
+            return;
         }
     }
 
