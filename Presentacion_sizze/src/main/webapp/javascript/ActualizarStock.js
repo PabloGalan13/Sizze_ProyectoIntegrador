@@ -39,29 +39,44 @@ document.addEventListener("DOMContentLoaded", function () {
         location.reload();
     });
 
-    // Simulación de productos (reemplazar con fetch después)
-    const productosSimulados = [
-        {id: 1, nombre: "Martillo", descripcion: "Herramienta de carpintería", stock: 12, imagen: "martillo.png"},
-        {id: 2, nombre: "Destornillador", descripcion: "Herramienta para tornillos", stock: 8, imagen: "destornillador.png"},
-        {id: 3, nombre: "Serrucho", descripcion: "Herramienta de corte manual", stock: 5, imagen: "serrucho.png"}
-    ];
+    const APP_CONTEXT = window.location.pathname.split('/')[1];
+    const BASE_URL = `${window.location.origin}/${APP_CONTEXT}`;
 
-    productosSimulados.forEach(prod => {
-        const div = document.createElement("div");
-        div.className = "producto";
-        div.innerHTML = `<img src="../img/${prod.imagen}" alt="${prod.nombre}"><a href="#">${prod.nombre}</a>`;
-        div.addEventListener("click", () => {
-            modalImg.src = `../img/${prod.imagen}`;
-            modalInputImg.value = "";
-            modalNombreInput.value = prod.nombre;
-            modalDescInput.value = prod.descripcion || "";
-            cantidad = prod.stock;
-            cantidadSpan.textContent = cantidad;
-            productoSeleccionado = prod;
-            modal.classList.remove("hidden");
-        });
-        contenedorProductos.appendChild(div);
-    });
+    fetch(`${BASE_URL}/ConsultaInventario`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+            .then(res => {
+                if (!res.ok)
+                    throw new Error('Error en la carga de productos');
+                return res.json();
+            })
+            .then(productos => {
+                productos.forEach(prod => {
+                    const div = document.createElement("div");
+                    div.className = "producto";
+                    const imagenUrl = `${BASE_URL}/${prod.imagen}`;
+                    div.innerHTML = `<img src="${imagenUrl}" alt="${prod.nombre}"><a href="#">${prod.nombre}</a>`;
+                    div.addEventListener("click", () => {
+                        modalImg.src = imagenUrl;
+                        modalInputImg.value = "";
+                        modalNombreInput.value = prod.nombre;
+                        modalDescInput.value = prod.descripcion || "";
+                        cantidad = prod.stock;
+                        cantidadSpan.textContent = cantidad;
+                        productoSeleccionado = prod;
+                        modal.classList.remove("hidden");
+                    });
+                    contenedorProductos.appendChild(div);
+                });
+            })
+            .catch(err => {
+                console.error("Error al cargar productos:", err);
+                mostrarError("No se pudieron cargar los productos.");
+            });
+
 
     btnSumar.addEventListener("click", () => {
         cantidad++;
@@ -93,28 +108,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formData = new FormData();
         formData.append("idProducto", productoSeleccionado.id);
-        formData.append("nuevoStock", cantidad);
-        formData.append("nuevoNombre", modalNombreInput.value);
-        formData.append("nuevaDescripcion", modalDescInput.value);
+        formData.append("nombre", modalNombreInput.value);           // <- correcto
+        formData.append("descripcion", modalDescInput.value);        // <- correcto
+        formData.append("stock", cantidad);                          // <- correcto
 
         if (modalInputImg.files.length > 0) {
-            formData.append("nuevaImagen", modalInputImg.files[0]);
+            formData.append("imgPortada", modalInputImg.files[0]);   // <- correcto
         }
+
 
         fetch("../ActualizarStockServlet", {
             method: "POST",
             body: formData
         })
-        .then(res => {
-            if (!res.ok) throw new Error("Error en la respuesta del servidor");
-            modalConfirmacion.classList.add("hidden");
-            modal.classList.add("hidden");
-            modalExito.classList.remove("hidden");
-        })
-        .catch(err => {
-            console.error("Error al actualizar:", err);
-            mostrarError("No se pudo actualizar el producto. Intenta más tarde.");
-        });
+                .then(res => {
+                    if (!res.ok)
+                        throw new Error("Error en la respuesta del servidor");
+                    modalConfirmacion.classList.add("hidden");
+                    modal.classList.add("hidden");
+                    modalExito.classList.remove("hidden");
+                })
+                .catch(err => {
+                    console.error("Error al actualizar:", err);
+                    mostrarError("No se pudo actualizar el producto. Intenta más tarde.");
+                });
     });
 
     cerrarExito.addEventListener("click", () => {

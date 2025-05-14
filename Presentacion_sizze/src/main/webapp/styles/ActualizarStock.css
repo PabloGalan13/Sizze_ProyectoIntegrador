@@ -206,3 +206,11 @@ h2 {
     margin-top: 15px;
 }
 
+#contenedorProductos {
+    max-height: calc(100vh - 280px); /* Ajusta según el espacio ocupado por el header y márgenes */
+    overflow-y: auto;
+    padding-right: 10px; /* espacio para que no tape el scroll */
+    border: 1px solid #ccc; /* opcional, solo para visualizar límites */
+    border-radius: 10px;
+}
+
