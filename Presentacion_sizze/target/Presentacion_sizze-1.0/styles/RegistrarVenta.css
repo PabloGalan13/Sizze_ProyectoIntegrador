@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: serif;
-    padding-top: 100px; /* Match con la altura del navbar */
+    padding-top: 70px; /* Match con la altura del navbar */
     background: linear-gradient(to right, #ffdd99, #ff99cc);
     font-family: 'Georgia', serif;
 }
@@ -21,11 +21,11 @@ body {
 .container {
     display: flex;
     padding: 2rem;
-    gap: 2rem;
     flex-wrap: wrap;
     background: white;
-    margin: 2rem;
     border-radius: 10px;
+    height: 82vh;
+
 }
 
 .venta, .productos {

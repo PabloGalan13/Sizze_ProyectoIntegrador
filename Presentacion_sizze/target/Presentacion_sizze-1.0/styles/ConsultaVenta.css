@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding-top: 100px; /* Match con la altura del navbar */
     box-sizing: border-box;
-
+    height: 100vh;
 }
 
 .ConsultarVentas {
@@ -22,11 +22,10 @@ body {
     border: 3px solid transparent; /* arregla el error 'bordert' */
     border-radius: 10px;
     text-align: center;
-    max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
-        padding-top: 80px; /* Match con la altura del navbar */
-
+    padding-top: 80px; /* Match con la altura del navbar */
+    height: 85vh;
 }
 
 

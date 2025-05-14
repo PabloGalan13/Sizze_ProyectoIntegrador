@@ -14,6 +14,8 @@ function inicializarEventos() {
     if (botonBuscar) {
         botonBuscar.addEventListener('click', clickBotonBuscar);
     }
+    document.querySelector('.btn.imprimir').addEventListener('click', imprimirTabla);
+    document.querySelector('.btn.descargar').addEventListener('click', descargarPDF);
 }
 
 async function cargarTodosProductos() {
@@ -93,7 +95,7 @@ function actualizarTabla(productos) {
         fila.innerHTML = `
             <td>${producto.id}</td>
             <td><img src="${imagenUrl}" alt="${producto.nombre}" style="max-width: 100px;"></td>
-            <td>${producto.nombre}</td
+            <td>${producto.nombre}</td>
             <td>${producto.modeloTalla}</td>
             <td>$${producto.precio.toFixed(2)}</td>
             <td>${producto.stock}</td>
@@ -114,4 +116,55 @@ function mostrarMensajeError(mensaje) {
 function ocultarMensajeError() {
     const alertaError = document.getElementById('mensajeError');
     alertaError.classList.add('d-none');
+}
+
+function imprimirTabla() {
+    const tablaHTML = document.querySelector('.table-responsive').innerHTML;
+
+    const ventana = window.open('', '_blank');
+    ventana.document.write(`
+        <html>
+            <head>
+                <title>Imprimir Inventario</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                    th { background-color: #f2f2f2; }
+                </style>
+            </head>
+            <body>
+                <h2>Reporte de Inventario </h2>
+                ${tablaHTML}
+                <script>
+                    window.onload = function () {
+                        window.print();
+                        window.onafterprint = function () { window.close(); };
+                    };
+                <\/script>
+            </body>
+        </html>
+    `);
+    ventana.document.close();
+}
+
+function descargarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Reporte de Inventario', 14, 15);
+
+    const tabla = document.querySelector('table');
+    const headers = [...tabla.querySelectorAll('thead th')].map(th => th.textContent);
+    const filas = [...tabla.querySelectorAll('tbody tr')].map(tr =>
+        [...tr.querySelectorAll('td')].map(td => td.textContent.trim())
+    );
+
+    doc.autoTable({
+        head: [headers],
+        body: filas,
+        startY: 20
+    });
+
+    doc.save('Inventario.pdf');
 }

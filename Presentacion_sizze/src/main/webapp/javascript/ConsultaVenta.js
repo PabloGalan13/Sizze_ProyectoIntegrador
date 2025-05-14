@@ -14,13 +14,16 @@ function inicializarEventos() {
     if (botonBuscar) {
         botonBuscar.addEventListener('click', clickBotonBuscar);
     }
+
+    document.querySelector('.btn.imprimir').addEventListener('click', imprimirTabla);
+    document.querySelector('.btn.descargar').addEventListener('click', descargarPDF);
 }
 
 async function cargarTodasLasVentas() {
     try {
         const response = await fetch(`${BASE_URL}/ConsultarVentas`, {
             method: 'GET',
-            headers: {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         });
 
         if (!response.ok) {
@@ -58,7 +61,7 @@ async function clickBotonBuscar() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({fechaInicio, fechaFin})
+            body: JSON.stringify({ fechaInicio, fechaFin })
         });
 
         if (!response.ok) {
@@ -98,12 +101,13 @@ function actualizarTabla(ventas) {
 
         tablaBody.appendChild(fila);  
     });
+
     tablaBody.querySelectorAll('.ver-detalle').forEach(boton => {
-    boton.addEventListener('click', function () {
-        const idVenta = this.getAttribute('data-id');
-        window.open(`${BASE_URL}/html/DetalleVenta.html?id=${idVenta}`, '_blank');
+        boton.addEventListener('click', function () {
+            const idVenta = this.getAttribute('data-id');
+            window.open(`${BASE_URL}/html/DetalleVenta.html?id=${idVenta}`, '_blank');
+        });
     });
-});
 }
 
 function mostrarMensajeError(mensaje) {
@@ -115,4 +119,55 @@ function mostrarMensajeError(mensaje) {
 function ocultarMensajeError() {
     const alertaError = document.getElementById('mensajeError');
     alertaError.classList.add('d-none');
+}
+
+function imprimirTabla() {
+    const tablaHTML = document.querySelector('.table-responsive').innerHTML;
+
+    const ventana = window.open('', '_blank');
+    ventana.document.write(`
+        <html>
+            <head>
+                <title>Imprimir Ventas</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                    th { background-color: #f2f2f2; }
+                </style>
+            </head>
+            <body>
+                <h2>Reporte de Ventas</h2>
+                ${tablaHTML}
+                <script>
+                    window.onload = function () {
+                        window.print();
+                        window.onafterprint = function () { window.close(); };
+                    };
+                <\/script>
+            </body>
+        </html>
+    `);
+    ventana.document.close();
+}
+
+function descargarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Reporte de Ventas', 14, 15);
+
+    const tabla = document.querySelector('table');
+    const headers = [...tabla.querySelectorAll('thead th')].map(th => th.textContent);
+    const filas = [...tabla.querySelectorAll('tbody tr')].map(tr =>
+        [...tr.querySelectorAll('td')].map(td => td.textContent.trim())
+    );
+
+    doc.autoTable({
+        head: [headers],
+        body: filas,
+        startY: 20
+    });
+
+    doc.save('ventas.pdf');
 }

@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 body {
     margin: 0;
     font-family: 'Georgia', serif;
-    background-color: white;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
     padding-top: 70px;
 }
 
@@ -52,9 +52,11 @@ h1 {
 
 .ActualizarStock {
     padding: 30px;
-    max-width: 600px;
     margin: 0 auto;
-    padding-top: 90px; /* Da espacio al contenido debajo del header */
+    padding-top: 30px; /* Da espacio al contenido debajo del header */
+    height: 82vh;
+    background: white;
+
 }
 
 h2 {
