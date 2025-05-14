@@ -180,8 +180,4 @@ document.getElementById("pagar").addEventListener("click", async () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cantidad").value = 1;
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> ActualizarStock

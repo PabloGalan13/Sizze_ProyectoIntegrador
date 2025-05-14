@@ -1,5 +1,15 @@
+itson\edu\mx\utils\VentaDetalleDTO.class
 itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.class
-itson\edu\mx\presenntacion_sizze\resources\JakartaEE91Resource.class
-itson\edu\mx\Servlets\BuscarProducto.class
+itson\edu\mx\Servlets\DetalleVenta.class
 itson\edu\mx\Servlets\RegistrarVenta.class
+itson\edu\mx\utils\GsonUtils$2.class
+itson\edu\mx\utils\VentaDTO.class
+itson\edu\mx\Servlets\ConsultaInventario.class
+itson\edu\mx\presenntacion_sizze\resources\JakartaEE91Resource.class
+itson\edu\mx\Servlets\ConsultarVentas.class
+itson\edu\mx\Servlets\BuscarProducto.class
+itson\edu\mx\utils\GsonUtils$1.class
+itson\edu\mx\utils\ProductoDTO.class
+itson\edu\mx\utils\GsonUtils.class
+itson\edu\mx\Servlets\ActualizarStockServlet.class
 itson\edu\mx\Servlets\ProductoServlet.class

@@ -41,11 +41,14 @@ class ProductoForm {
             case 'Ropa':
                 opciones = ['Camiseta', 'Pantalón', 'Zapatos'];
                 break;
-            case 'Micas':
+            case 'Mica':
                 opciones = ['Mica protectora', 'Mica curvada', 'Mica completa'];
                 break;
             case 'Accesorios':
                 opciones = ['Funda', 'Cargador', 'Audífonos'];
+                break;
+            case 'Electronica':
+                opciones = ['Telefonos', 'Cables', 'Cargadores'];
                 break;
         }
 
@@ -121,33 +124,33 @@ class ProductoForm {
         this.actualizarTipo();
     }
 
-mostrarMensaje() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.has('mensaje')) {
-        const mensaje = params.get('mensaje');
-        
-        if (mensaje === 'exito') {
-            modalExito.classList.remove('hidden');
-        } else if (mensaje === 'error') {
-            modalError.classList.remove('hidden');
-            mensajeError.textContent = 'Hubo un error al registrar el producto. Inténtalo de nuevo.';
+    mostrarMensaje() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('mensaje')) {
+            const mensaje = params.get('mensaje');
+
+            if (mensaje === 'exito') {
+                modalExito.classList.remove('hidden');
+            } else if (mensaje === 'error') {
+                modalError.classList.remove('hidden');
+                mensajeError.textContent = 'Hubo un error al registrar el producto. Inténtalo de nuevo.';
+            }
+
+            // Limpiar parámetros de la URL
+            params.delete('mensaje');
+            const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            window.history.replaceState({}, '', nuevaURL);
         }
 
-        // Limpiar parámetros de la URL
-        params.delete('mensaje');
-        const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
-        window.history.replaceState({}, '', nuevaURL);
+        // Botones para cerrar los modales
+        cerrarExito.addEventListener('click', () => {
+            modalExito.classList.add('hidden');
+        });
+
+        cerrarError.addEventListener('click', () => {
+            modalError.classList.add('hidden');
+        });
     }
-
-    // Botones para cerrar los modales
-    cerrarExito.addEventListener('click', () => {
-        modalExito.classList.add('hidden');
-    });
-
-    cerrarError.addEventListener('click', () => {
-        modalError.classList.add('hidden');
-    });
-}
 }
 
 window.addEventListener('load', () => new ProductoForm());

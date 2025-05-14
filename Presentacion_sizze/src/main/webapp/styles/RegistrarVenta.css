@@ -2,11 +2,8 @@ body {
     margin: 0;
     font-family: serif;
     padding-top: 100px; /* Match con la altura del navbar */
-    background: linear-gradient(to right, #fdf497, #fd5949, #d6249f, #285AEB);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    color: #000;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    font-family: 'Georgia', serif;
 }
 
 @keyframes gradient {
