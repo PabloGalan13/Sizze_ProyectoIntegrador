@@ -100,5 +100,12 @@ public class Venta implements Serializable {
     public void setProductos(List<DetalleVenta> productos) {
         this.productos = productos;
     }
-    
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

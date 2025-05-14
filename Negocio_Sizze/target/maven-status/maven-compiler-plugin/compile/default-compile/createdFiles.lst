@@ -1,0 +1,4 @@
+registrarVenta\RegistrarVentaBO.class
+registrarVenta\IRegistrarVentaBO.class
+itson\edu\mx\negocio_sizze\Negocio_Sizze.class
+excepciones\NegocioException.class
