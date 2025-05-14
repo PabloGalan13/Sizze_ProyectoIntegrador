@@ -114,3 +114,11 @@ tr:nth-child(even) {
 .btn:hover {
     opacity: 0.8;
 }
+
+.table-responsive {
+    max-height: calc(100vh - 280px); /* Ajusta según el espacio ocupado por el header y márgenes */
+    overflow-y: auto;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
