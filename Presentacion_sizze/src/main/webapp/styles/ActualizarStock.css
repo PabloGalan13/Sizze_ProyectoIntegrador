@@ -30,9 +30,17 @@ body {
 }
 
 .menu {
-    font-size: 24px;
+    font-size: 30px;
     cursor: pointer;
+    color: black;
+    transition: color 0.3s, transform 0.3s;
 }
+
+.menu:hover {
+    color: #81486c;
+    transform: scale(1.2);
+}
+    
 
 h1 {
     margin: 0; /* Asegura que no haya margen extra */
