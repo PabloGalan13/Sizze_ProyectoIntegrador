@@ -10,21 +10,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Actualizar Stock</title>
         <link rel="stylesheet" href="../styles/ActualizarStock.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
-        <header class="navbar">
-            <div class="menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <h1>SIZZE</h1>
-            <div class="profile-icon">
-                <i class="fas fa-user-circle"></i>
-            </div>
-        </header>
+        <!-- Contenedores para insertar dinámicamente header y sidebar -->
+        <div id="header-container"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay" class="overlay hidden"></div>
 
         <main class="ActualizarStock">
-            <button class="volver"><i class="fas fa-arrow-left"></i></button>
             <h2>Actualizar Productos</h2>
             <div class="search-bar">
                 <div class="input-group">
@@ -92,6 +85,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <button id="cerrarError" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
             </div>
         </div>
+        <script src="../javascript/layout.js" defer></script>
         <script src="../javascript/ActualizarStock.js" defer></script>
     </body>
 </html>

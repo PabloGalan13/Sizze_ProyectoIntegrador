@@ -1,20 +1,27 @@
 body {
     margin: 0;
     font-family: serif;
+    padding-top: 100px; /* Match con la altura del navbar */
     background: linear-gradient(to right, #fdf497, #fd5949, #d6249f, #285AEB);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     color: #000;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-  
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .container {
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
     display: flex;
     padding: 2rem;
     gap: 2rem;
@@ -22,24 +29,24 @@ body {
     background: white;
     margin: 2rem;
     border-radius: 10px;
-  }
-  
-  .venta, .productos {
+}
+
+.venta, .productos {
     flex: 1 1 45%;
-  }
-  
-  h2 {
+}
+
+h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     margin: 0.5rem 0 0.25rem;
-  }
-  
-  input[type="text"],
-  input[type="number"] {
+}
+
+input[type="text"],
+input[type="number"] {
     width: 100%;
     padding: 0.5rem;
     border-radius: 10px;
@@ -47,26 +54,26 @@ body {
     font-style: italic;
     color: #444;
     margin-bottom: 1rem;
-  }
-  
-  .metodos-pago {
+}
+
+.metodos-pago {
     display: flex;
     gap: 2rem;
     margin: 1rem 0;
-  }
-  
-  .metodo {
+}
+
+.metodo {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .metodo img {
+}
+
+.metodo img {
     width: 40px;
     height: 40px;
-  }
-  
-  .descuento button {
+}
+
+.descuento button {
     background-color: #fff0b3;
     border: none;
     padding: 0.5rem;
@@ -74,9 +81,9 @@ body {
     text-decoration: underline;
     cursor: pointer;
     margin-bottom: 1rem;
-  }
-  
-  .pagar {
+}
+
+.pagar {
     background: linear-gradient(to right, #fcd9d9, #fcb8ff);
     border: none;
     padding: 1rem;
@@ -84,43 +91,155 @@ body {
     border-radius: 10px;
     cursor: pointer;
     width: 100%;
-  }
-  
-  .productos {
+}
+
+.productos {
     background-color: #fff;
     border-left: 1px solid #ccc;
     padding-left: 1rem;
-  }
-  
-  .producto {
+}
+
+.producto {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-  }
-  
-  .producto img {
+}
+
+.producto img {
     width: 80px;
     height: 80px;
     object-fit: cover;
     margin-right: 1rem;
-  }
-  
-  .info {
+}
+
+.info {
     flex-grow: 1;
-  }
-  
-  .eliminar {
+}
+
+.eliminar {
     background: none;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
     color: #900;
-  }
-  
-  .total {
+}
+
+.total {
     border-top: 1px solid #ccc;
     padding-top: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
-  }
-  
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding-top: 20px;
+}
+
+/* Mostrar sidebar */
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #eee;
+}
+
+.cerrar-sidebar {
+    text-align: right;
+    padding: 0 20px;
+}
+
+.cerrar-sidebar i {
+    font-size: 22px;
+    cursor: pointer;
+    color: #444;
+}
+
+/* Overlay oscuro para cerrar al hacer clic fuera */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ocultar elementos por defecto */
+.hidden {
+    display: none;
+}
+.sidebar ul li a.activo {
+    font-weight: bold;
+    color: #81486c; /* puedes cambiarlo según tu diseño */
+    text-decoration: underline;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.menu:hover {
+    color: #81486c;
+    transform: scale(1.2);
+}
+
+
+h1 {
+    margin: 0; /* Asegura que no haya margen extra */
+    padding-left: 10px; /* Espacio entre el menú y el título */
+    flex-grow: 1; /* Esto permite que el título ocupe el espacio restante */
+}
+

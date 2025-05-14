@@ -11,4 +11,5 @@ itson\edu\mx\Servlets\BuscarProducto.class
 itson\edu\mx\utils\GsonUtils$1.class
 itson\edu\mx\utils\ProductoDTO.class
 itson\edu\mx\utils\GsonUtils.class
+itson\edu\mx\Servlets\ActualizarStockServlet.class
 itson\edu\mx\Servlets\ProductoServlet.class

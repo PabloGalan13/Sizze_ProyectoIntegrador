@@ -8,8 +8,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <title>Consultar Inventario</title>
         <link rel="stylesheet" href="../styles/ConsultarInventario.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
+        <!-- Contenedores para insertar dinámicamente header y sidebar -->
+        <div id="header-container"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay" class="overlay hidden"></div>
+
         <div class="ConsultarInventario">
             <h2>Consultar Inventario</h2>
 
@@ -49,6 +55,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <button class="btn imprimir">🖨️ Imprimir</button>
             </div>
         </div>
+                <script src="../javascript/layout.js" defer></script>
         <script src="../javascript/ConsultaInventario.js" defer></script>
     </body>
 </html>

@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const contenedorProductos = document.getElementById("contenedorProductos");
-    const botonBuscar = document.getElementById('botonBuscar');
-    if (botonBuscar) {
-        botonBuscar.addEventListener('click', clickBotonBuscar);
-    }
+document.addEventListener("DOMContentLoaded",async  () => {
+    await window.layoutCargado; // ← Espera que el layout se cargue primero
 
-    // Modales y elementos
+    // --- Elementos DOM --- (excepto sidebar)
+    const contenedorProductos = document.getElementById("contenedorProductos");
+    const botonBuscar = document.getElementById("botonBuscar");
+
     const modal = document.getElementById("modalProducto");
     const modalImg = document.getElementById("modalImg");
     const modalInputImg = document.getElementById("modalInputImg");
@@ -30,118 +29,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const mensajeError = document.getElementById("mensajeError");
     const cerrarError = document.getElementById("cerrarError");
 
+    // --- Variables de estado ---
     let cantidad = 0;
     let productoSeleccionado = null;
-
-    function mostrarError(mensaje) {
-        mensajeError.textContent = mensaje;
-        modalError.classList.remove("hidden");
-    }
-
-    cerrarError.addEventListener("click", () => {
-        modalError.classList.add("hidden");
-        location.reload();
-    });
-
     const APP_CONTEXT = window.location.pathname.split('/')[1];
     const BASE_URL = `${window.location.origin}/${APP_CONTEXT}`;
-    document.getElementById("botonBuscar").addEventListener("click", clickBotonBuscar);
 
-    fetch(`${BASE_URL}/ConsultaInventario`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-            .then(res => {
-                if (!res.ok)
-                    throw new Error('Error en la carga de productos');
-                return res.json();
-            })
-            .then(productos => {
-                productos.forEach(prod => {
-                    const div = document.createElement("div");
-                    div.className = "producto";
-                    const imagenUrl = `${BASE_URL}/${prod.imagen}`;
-                    div.innerHTML = `<img src="${imagenUrl}" alt="${prod.nombre}"><a href="#">${prod.nombre}</a>`;
-                    div.addEventListener("click", () => {
-                        modalImg.src = imagenUrl;
-                        modalInputImg.value = "";
-                        modalNombreInput.value = prod.nombre;
-                        modalDescInput.value = prod.descripcion || "";
-                        cantidad = prod.stock;
-                        cantidadSpan.textContent = cantidad;
-                        productoSeleccionado = prod;
-                        modal.classList.remove("hidden");
-                    });
-                    contenedorProductos.appendChild(div);
-                });
-            })
-            .catch(err => {
-                console.error("Error al cargar productos:", err);
-                mostrarError("No se pudieron cargar los productos.");
-            });
+    // --- Funciones de UI ---
+    const mostrarError = (mensaje) => {
+        mensajeError.textContent = mensaje;
+        modalError.classList.remove("hidden");
+    };
 
-    async function clickBotonBuscar() {
-        const nombreProducto = document.getElementById('busquedaProducto').value.trim();
-
-        contenedorProductos.innerHTML = ''; // Siempre limpiamos primero
-
-        if (!nombreProducto) {
-            // Si no hay texto, volvemos a cargar todos los productos con GET
-            try {
-                const res = await fetch(`${BASE_URL}/ConsultaInventario`, {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json'}
-                });
-
-                if (!res.ok)
-                    throw new Error('Error al recargar productos');
-
-                const productos = await res.json();
-
-                if (!productos || productos.length === 0) {
-                    mostrarError('No hay productos disponibles');
-                    return;
-                }
-
-                productos.forEach(crearElementoProducto);
-            } catch (error) {
-                console.error("Error al recargar productos:", error);
-                mostrarError("No se pudieron recargar los productos.");
-            }
-
-            return; // Fin de la función si estaba vacío
-        }
-
-        // Si sí hay texto, se hace búsqueda POST
-        try {
-            const response = await fetch(`${BASE_URL}/ConsultaInventario`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({nombreProducto})
-            });
-
-            if (!response.ok) {
-                throw new Error('Error en la respuesta del servidor');
-            }
-
-            const productos = await response.json();
-
-            if (!productos || productos.length === 0) {
-                mostrarError('Producto no encontrado');
-                return;
-            }
-
-            productos.forEach(crearElementoProducto);
-        } catch (error) {
-            console.error('Error al buscar productos:', error);
-            mostrarError('Error al buscar productos. Por favor, intente nuevamente.');
-        }
-    }
-    function crearElementoProducto(prod) {
+    const crearElementoProducto = (prod) => {
         const div = document.createElement("div");
         div.className = "producto";
         const imagenUrl = `${BASE_URL}/${prod.imagen}`;
@@ -157,9 +57,59 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.classList.remove("hidden");
         });
         contenedorProductos.appendChild(div);
+    };
+
+    
+
+    // --- Carga inicial de productos ---
+    fetch(`${BASE_URL}/ConsultaInventario`)
+            .then(res => {
+                if (!res.ok)
+                    throw new Error('Error en la carga de productos');
+                return res.json();
+            })
+            .then(productos => productos.forEach(crearElementoProducto))
+            .catch(err => {
+                console.error(err);
+                mostrarError("No se pudieron cargar los productos.");
+            });
+
+    // --- Búsqueda de productos ---
+    const clickBotonBuscar = async () => {
+        const nombreProducto = document.getElementById('busquedaProducto').value.trim();
+        contenedorProductos.innerHTML = '';
+
+        const metodo = nombreProducto ? 'POST' : 'GET';
+        const cuerpo = nombreProducto ? JSON.stringify({nombreProducto}) : null;
+
+        try {
+            const res = await fetch(`${BASE_URL}/ConsultaInventario`, {
+                method: metodo,
+                headers: {'Content-Type': 'application/json'},
+                body: cuerpo
+            });
+
+            if (!res.ok)
+                throw new Error('Error en la búsqueda');
+            const productos = await res.json();
+
+            if (!productos || productos.length === 0) {
+                mostrarError(nombreProducto ? 'Producto no encontrado' : 'No hay productos disponibles');
+                return;
+            }
+
+            productos.forEach(crearElementoProducto);
+        } catch (err) {
+            console.error(err);
+            mostrarError("Error al buscar productos.");
+        }
+    };
+
+    if (botonBuscar) {
+        botonBuscar.addEventListener("click", clickBotonBuscar);
     }
 
-
+    // --- Acciones en modal de producto ---
     btnSumar.addEventListener("click", () => {
         cantidad++;
         cantidadSpan.textContent = cantidad;
@@ -173,31 +123,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     btnActualizar.addEventListener("click", () => {
-        if (!productoSeleccionado) {
-            mostrarError("No hay producto seleccionado.");
-            return;
-        }
+        if (!productoSeleccionado)
+            return mostrarError("No hay producto seleccionado.");
         confirmNombre.textContent = modalNombreInput.value;
         confirmCantidad.textContent = cantidad;
         modalConfirmacion.classList.remove("hidden");
     });
 
     confirmarCambios.addEventListener("click", () => {
-        if (!productoSeleccionado) {
-            mostrarError("Producto no válido.");
-            return;
-        }
+        if (!productoSeleccionado)
+            return mostrarError("Producto no válido.");
 
         const formData = new FormData();
         formData.append("idProducto", productoSeleccionado.id);
-        formData.append("nombre", modalNombreInput.value);           // <- correcto
-        formData.append("descripcion", modalDescInput.value);        // <- correcto
-        formData.append("stock", cantidad);                          // <- correcto
+        formData.append("nombre", modalNombreInput.value);
+        formData.append("descripcion", modalDescInput.value);
+        formData.append("stock", cantidad);
 
         if (modalInputImg.files.length > 0) {
-            formData.append("imgPortada", modalInputImg.files[0]);   // <- correcto
+            formData.append("imgPortada", modalInputImg.files[0]);
         }
-
 
         fetch("../ActualizarStockServlet", {
             method: "POST",
@@ -205,20 +150,15 @@ document.addEventListener("DOMContentLoaded", function () {
         })
                 .then(res => {
                     if (!res.ok)
-                        throw new Error("Error en la respuesta del servidor");
+                        throw new Error("Error al actualizar");
                     modalConfirmacion.classList.add("hidden");
                     modal.classList.add("hidden");
                     modalExito.classList.remove("hidden");
                 })
                 .catch(err => {
-                    console.error("Error al actualizar:", err);
-                    mostrarError("No se pudo actualizar el producto. Intenta más tarde.");
+                    console.error(err);
+                    mostrarError("No se pudo actualizar el producto.");
                 });
-    });
-
-    cerrarExito.addEventListener("click", () => {
-        modalExito.classList.add("hidden");
-        location.reload();
     });
 
     cancelarCambios.addEventListener("click", () => {
@@ -229,14 +169,22 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.classList.add("hidden");
     });
 
-    // Mostrar vista previa de la imagen seleccionada
+    cerrarExito.addEventListener("click", () => {
+        modalExito.classList.add("hidden");
+        location.reload();
+    });
+
+    cerrarError.addEventListener("click", () => {
+        modalError.classList.add("hidden");
+        location.reload();
+    });
+
+    // --- Previsualización de imagen ---
     modalInputImg.addEventListener("change", () => {
         const file = modalInputImg.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = () => {
-                modalImg.src = reader.result;
-            };
+            reader.onload = () => modalImg.src = reader.result;
             reader.readAsDataURL(file);
         }
     });

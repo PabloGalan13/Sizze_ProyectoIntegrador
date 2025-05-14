@@ -6,50 +6,55 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 26 mar 2025, 12:00:59 p.m.
     Author     : Gabriel
 */
+
+
 body {
-    font-family: 'Georgia', serif;
+    margin: 0;
+    padding-top: 80px; /* Espacio si hay header fijo */
+    font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to right, #ffdd99, #ff99cc);
+}
+
+/* Centrado del formulario */
+form {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding-top: 70px;
-}
-
-.RegistrarProducto {
-    background: white;
-    padding: 30px;
-    bordert: 3px ;
-    border-radius: 10px;
-    text-align: center;
-    width: 100%;
-    height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.RegistrarProducto h2 {
-    font-size: 42px;
-    font-weight: bold;
-    margin-bottom: 110px;
     margin-top: 20px;
 }
 
+/* Contenedor principal del formulario */
+.RegistrarProducto {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.RegistrarProducto h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Contenedor de campos */
 .container {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: space-between;
-    gap: 15px;
-    width: 50%;
 }
 
+/* Agrupación de campos */
 .field-group {
+    flex: 1 1 45%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: 48%;
 }
 
 .field-group label {
@@ -60,28 +65,41 @@ body {
 .field-group input,
 .field-group select {
     padding: 10px;
-    width: 100%;    
-    max-width: 400px;
-    border: 2px solid;
-    border-image: linear-gradient(to right, #ffdd99, #ff99cc) 1;
-    font-weight: bold;
-    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
     outline: none;
-
+    transition: border-color 0.3s ease;
 }
 
 .field-group input:focus,
 .field-group select:focus {
-    border: 2px solid #ff99cc;
+    border-color: #ff66a3;
 }
 
-.buttons {
-    margin-top: 20px;
+/* Estilo del input de imagen */
+.imgs-post {
+    margin-top: 10px;
     display: flex;
-    gap: 60px;
-    justify-content: center;
+    flex-direction: column;
 }
+
+.imgs-post input[type="file"] {
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background-color: #fafafa;
+    cursor: pointer;
+}
+
+/* Botones */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
 
 .buttons button {
     padding: 12px 25px;
@@ -95,6 +113,177 @@ body {
     border: 2px solid black;
 }
 
-.buttons button:hover {
+button.confirmar,
+button.cancelar {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+
+}
+
+button.confirmar {
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    color: white;
+}
+
+button.cancelar {
+    background-color: #dc3545;
+    color: white;
+}
+
+button.confirmar:hover {
     opacity: 0.8;
 }
+
+button.cancelar:hover {
+    opacity: 0.8;
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding-top: 20px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100px;
+    margin-bottom: 15px;
+}
+/* Mostrar sidebar */
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #eee;
+}
+
+.cerrar-sidebar {
+    text-align: right;
+    padding: 0 20px;
+}
+
+.cerrar-sidebar i {
+    font-size: 22px;
+    cursor: pointer;
+    color: #444;
+}
+
+/* Overlay oscuro para cerrar al hacer clic fuera */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ocultar elementos por defecto */
+.hidden {
+    display: none;
+}
+.sidebar ul li a.activo {
+    font-weight: bold;
+    color: #81486c; /* puedes cambiarlo según tu diseño */
+    text-decoration: underline;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.menu:hover {
+    color: #81486c;
+    transform: scale(1.2);
+}
+
+
+h1 {
+    margin: 0; /* Asegura que no haya margen extra */
+    padding-left: 10px; /* Espacio entre el menú y el título */
+    flex-grow: 1; /* Esto permite que el título ocupe el espacio restante */
+}
+

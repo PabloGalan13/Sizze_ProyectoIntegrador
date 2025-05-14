@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
+const modalExito = document.getElementById("modalExito");
+const cerrarExito = document.getElementById("cerrarExito");
 
+const modalError = document.getElementById("modalError");
+const mensajeError = document.getElementById("mensajeError");
+const cerrarError = document.getElementById("cerrarError");
 
 class ProductoForm {
     constructor() {
@@ -116,22 +121,33 @@ class ProductoForm {
         this.actualizarTipo();
     }
 
-    mostrarMensaje() {
-        const params = new URLSearchParams(window.location.search);
-        if (params.has('mensaje')) {
-            const mensaje = params.get('mensaje');
-            if (mensaje === 'exito') {
-                alert('Producto registrado exitosamente.');
-            } else if (mensaje === 'error') {
-                alert('Hubo un error al registrar el producto. Inténtalo de nuevo.');
-            }
-
-            // ❌ Quitar el parámetro 'mensaje' de la URL
-            params.delete('mensaje');
-            const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
-            window.history.replaceState({}, '', nuevaURL);
+mostrarMensaje() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('mensaje')) {
+        const mensaje = params.get('mensaje');
+        
+        if (mensaje === 'exito') {
+            modalExito.classList.remove('hidden');
+        } else if (mensaje === 'error') {
+            modalError.classList.remove('hidden');
+            mensajeError.textContent = 'Hubo un error al registrar el producto. Inténtalo de nuevo.';
         }
+
+        // Limpiar parámetros de la URL
+        params.delete('mensaje');
+        const nuevaURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+        window.history.replaceState({}, '', nuevaURL);
     }
+
+    // Botones para cerrar los modales
+    cerrarExito.addEventListener('click', () => {
+        modalExito.classList.add('hidden');
+    });
+
+    cerrarError.addEventListener('click', () => {
+        modalError.classList.add('hidden');
+    });
+}
 }
 
 window.addEventListener('load', () => new ProductoForm());

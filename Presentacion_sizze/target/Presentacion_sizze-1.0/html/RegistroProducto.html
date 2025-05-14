@@ -8,9 +8,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <title>Registrar Producto</title>
         <link rel="stylesheet" href="../styles/RegistrarProducto.css">
-        <script src="../javascript/RegistroProducto.js"></script>
+        <script src="../javascript/RegistroProducto.js" defer></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <script src="../javascript/layout.js" defer></script>
     </head>
     <body>
+        <!-- Contenedores para insertar dinámicamente header y sidebar -->
+        <div id="header-container"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay" class="overlay hidden"></div>
+
         <form action="/Presentacion_sizze/ProductoServlet" method="post" enctype="multipart/form-data">
             <div class="RegistrarProducto">
                 <h2>Registrar Producto</h2>
@@ -47,7 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <div class="field-group">
                         <label for="costo">Costo</label>
                         <input type="text" id="costo" name="precio" placeholder="Ej: 200.00">
-                        </div>
+                    </div>
 
                     <div class="imgs-post">
                         <label for="imgPortada">Producto:</label>
@@ -61,6 +68,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </div>
             </div>
         </form>
+        <!-- Modal de éxito -->
+        <div id="modalExito" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: #4BB543;"></i>
+                <h3>¡Producto y stock actualizado con éxito!</h3>
+                <button id="cerrarExito" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
+        <!-- Modal de error -->
+        <div id="modalError" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-times-circle" style="font-size: 48px; color: #e74c3c;"></i>
+                <h3>¡Error!</h3>
+                <p id="mensajeError">Ocurrió un problema al actualizar el producto y stock.</p>
+                <button id="cerrarError" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
     </body>
 </html>
 
