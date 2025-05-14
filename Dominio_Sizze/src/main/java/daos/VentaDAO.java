@@ -7,17 +7,17 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 
-
 public class VentaDAO implements IVentaDAO {
-    
+
     private final EntityManagerFactory emf;
-    
+
     public VentaDAO() {
         emf = Persistence.createEntityManagerFactory("SizzePU");
     }
-    
+
     @Override
     public void registrarVenta(Venta venta) throws ExcepcionAT {
         EntityManager em = null;
@@ -37,7 +37,7 @@ public class VentaDAO implements IVentaDAO {
             }
         }
     }
-    
+
     @Override
     public void actualizarVenta(Venta venta) throws ExcepcionAT {
         EntityManager em = null;
@@ -57,7 +57,7 @@ public class VentaDAO implements IVentaDAO {
             }
         }
     }
-    
+
     @Override
     public void eliminarVenta(Venta venta) throws ExcepcionAT {
         EntityManager em = null;
@@ -78,7 +78,7 @@ public class VentaDAO implements IVentaDAO {
             }
         }
     }
-    
+
     @Override
     public Venta obtenerVentaPorId(Long id) throws ExcepcionAT {
         EntityManager em = null;
@@ -93,7 +93,7 @@ public class VentaDAO implements IVentaDAO {
             }
         }
     }
-    
+
     @Override
     public List<Venta> obtenerVentas() throws ExcepcionAT {
         EntityManager em = null;
@@ -110,4 +110,19 @@ public class VentaDAO implements IVentaDAO {
             }
         }
     }
+
+    public List<Venta> obtenerPorRangoFechas(LocalDate inicio, LocalDate fin) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            TypedQuery<Venta> query = em.createQuery(
+                    "SELECT v FROM Venta v WHERE v.fecha BETWEEN :inicio AND :fin", Venta.class);
+            query.setParameter("inicio", inicio);
+            query.setParameter("fin", fin);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

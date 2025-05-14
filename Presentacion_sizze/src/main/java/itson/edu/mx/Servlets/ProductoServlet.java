@@ -95,8 +95,9 @@ public class ProductoServlet extends HttpServlet {
             int stock = Integer.parseInt(request.getParameter("stock"));
             String categoriaNombre = request.getParameter("categoria");
 
-            Categoria categoria = new CategoriaDAO().obtenerCategoriaPorNombre(categoriaNombre);
-            
+            Categoria categoria = new Categoria();
+            CategoriaDAO cate = new CategoriaDAO();
+            categoria = cate.obtenerCategoriaPorNombre(categoriaNombre);
             Part filePart = request.getPart("imgPortada");
             String fileName = filePart.getSubmittedFileName();
 
@@ -127,8 +128,8 @@ public class ProductoServlet extends HttpServlet {
             }
             // Guardar la ruta relativa para la base de datos
             String imagen = "postImgs/" + uniqueFileName;
-            
-            Producto producto = new Producto(nombre, descripcion,descripcion , precio, stock, categoria, tipo, imagen);
+
+            Producto producto = new Producto(nombre, descripcion, descripcion, precio, stock, categoria, tipo, imagen);
             ProductoDAO productoDAO = new ProductoDAO();
 
             boolean guardado = productoDAO.registrarProducto(producto);

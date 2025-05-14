@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Actualizar Stock</title>
+        <link rel="stylesheet" href="../styles/ActualizarStock.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- Contenedores para insertar dinámicamente header y sidebar -->
+        <div id="header-container"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay" class="overlay hidden"></div>
+
+        <main class="ActualizarStock">
+            <h2>Actualizar Productos</h2>
+            <div class="search-bar">
+                <div class="input-group">
+                    <input type="text" id="busquedaProducto" class="form-control" placeholder="Ingrese nombre del producto">
+                    <button class="boton-pastel" style="align-items:center" id="botonBuscar">Buscar</button>
+                </div>
+            </div>
+            <div id="contenedorProductos">
+            </div>
+        </main>
+        <!-- Modal de edición (actualizado) -->
+        <div id="modalProducto" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+
+                <img id="modalImg" src="" alt="Producto" style="max-width: 100px; margin-top: 10px;">
+                <br>
+                <label style="margin-top: 10px;">Nombre:</label>
+                <br>
+                <input type="text" id="modalNombreInput">
+                <br>
+                <label style="margin-top: 10px;">Descripción:</label>
+                <textarea id="modalDescInput" style="width: 399px; height: 120px;"></textarea>
+
+                <div class="cantidad-control">
+                    <button id="btnRestar" class="boton-pastel">-</button>
+                    <span id="cantidad">0</span>
+                    <button id="btnSumar" class="boton-pastel">+</button>
+                </div>
+                <div class="imagen-input-wrapper">
+                    <label>Imagen:</label>
+                    <input type="file" id="modalInputImg" accept="image/*">
+                </div>
+
+                <button id="btnActualizar" class="boton-pastel" style="margin-top: 20px;">Actualizar</button>
+            </div>
+        </div>
+
+
+        <!-- Modal de confirmación -->
+        <div id="modalConfirmacion" class="modal hidden">
+            <div class="modal-content">
+                <p>¿Estás seguro de actualizar el producto  <strong id="confirmNombre"></strong> y su stock a <strong id="confirmCantidad"></strong> unidades?</p>
+                <div class="buttons" style="justify-content: center; gap: 30px; margin-top: 20px;">
+                    <button id="confirmarCambios" class="boton-pastel">Sí, actualizar</button>
+                    <button id="cancelarCambios" class="boton-pastel">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de éxito -->
+        <div id="modalExito" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: #4BB543;"></i>
+                <h3>¡Producto y stock actualizado con éxito!</h3>
+                <button id="cerrarExito" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
+        <!-- Modal de error -->
+        <div id="modalError" class="modal hidden">
+            <div class="modal-content">
+                <i class="fas fa-times-circle" style="font-size: 48px; color: #e74c3c;"></i>
+                <h3>¡Error!</h3>
+                <p id="mensajeError">Ocurrió un problema al actualizar el producto y stock.</p>
+                <button id="cerrarError" class="boton-pastel" style="margin-top: 20px;">Aceptar</button>
+            </div>
+        </div>
+        <script src="../javascript/layout.js" defer></script>
+        <script src="../javascript/ActualizarStock.js" defer></script>
+    </body>
+</html>
+
+
+
