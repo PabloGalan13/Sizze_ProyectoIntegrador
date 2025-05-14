@@ -4,11 +4,10 @@
  */
 package itson.edu.mx.Servlets;
 
-import com.google.gson.Gson;
-import daos.CategoriaDAO;
 import daos.ProductoDAO;
 import entidades.Categoria;
 import entidades.Producto;
+import excepciones.ExcepcionAT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,8 +16,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import excepciones.ExcepcionAT;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.util.UUID;
@@ -89,62 +86,61 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String nombre = request.getParameter("nombre");
-            String tipo = request.getParameter("tipo");
-            String descripcion = request.getParameter("talla");
-            double precio = Double.parseDouble(request.getParameter("precio"));
-            int stock = Integer.parseInt(request.getParameter("stock"));
-            String categoriaNombre = request.getParameter("categoria");
-
-            Categoria categoria = new CategoriaDAO().obtenerCategoriaPorNombre(categoriaNombre);
-
-            Part filePart = request.getPart("imgPortada");
-            String fileName = filePart.getSubmittedFileName();
-
-            // Ruta para guardar la imagen
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
-
-            // Crear la carpeta si no existe
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                if (uploadDir.mkdirs()) {
-                    System.out.println("Directorio creado: " + uploadPath);
-                } else {
-                    System.out.println("No se pudo crear el directorio: " + uploadPath);
-                }
-            }
-
-            // Generar un nombre único para la imagen
-            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
-
-            // Guardar la imagen en la carpeta
-            String filePath = uploadPath + File.separator + uniqueFileName;
-            try {
-                filePart.write(filePath);
-                System.out.println("Archivo guardado en: " + filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Error al guardar el archivo: " + e.getMessage());
-            }
-            // Guardar la ruta relativa para la base de datos
-            String imagen = "postImgs/" + uniqueFileName;
-
-            Producto producto = new Producto(nombre, descripcion, descripcion, precio, stock, categoria, tipo, imagen);
-            ProductoDAO productoDAO = new ProductoDAO();
-
-            boolean guardado = productoDAO.registrarProducto(producto);
-
-            if (guardado) {
-                response.sendRedirect("html/RegistroProducto.html?mensaje=exito");
-            } else {
-                response.sendRedirect("html/RegistroProducto.html?mensaje=error");
-            }
-
-        } catch (ExcepcionAT ex) {
-            Logger.getLogger(ProductoServlet.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            String nombre = request.getParameter("nombre");
+//            String tipo = request.getParameter("tipo");
+//            String descripcion = request.getParameter("talla");
+//            double precio = Double.parseDouble(request.getParameter("precio"));
+//            int stock = Integer.parseInt(request.getParameter("stock"));
+//            String categoriaNombre = request.getParameter("categoria");
+//
+//            Categoria categoria = new Categoria();
+//            categoria.setNombre(categoriaNombre);
+//            
+//            Part filePart = request.getPart("imgPortada");
+//            String fileName = filePart.getSubmittedFileName();
+//
+//            // Ruta para guardar la imagen
+//            String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
+//
+//            // Crear la carpeta si no existe
+//            File uploadDir = new File(uploadPath);
+//            if (!uploadDir.exists()) {
+//                if (uploadDir.mkdirs()) {
+//                    System.out.println("Directorio creado: " + uploadPath);
+//                } else {
+//                    System.out.println("No se pudo crear el directorio: " + uploadPath);
+//                }
+//            }
+//
+//            // Generar un nombre único para la imagen
+//            String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+//
+//            // Guardar la imagen en la carpeta
+//            String filePath = uploadPath + File.separator + uniqueFileName;
+//            try {
+//                filePart.write(filePath);
+//                System.out.println("Archivo guardado en: " + filePath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                System.out.println("Error al guardar el archivo: " + e.getMessage());
+//            }
+//            // Guardar la ruta relativa para la base de datos
+//            String imagen = "postImgs/" + uniqueFileName;
+//            
+//            Producto producto = new Producto(descripcion, nombre, precio, stock, categoria, tipo, imagen);
+//            ProductoDAO productoDAO = new ProductoDAO();
+//
+//            boolean guardado = productoDAO.registrarProducto(producto);
+//
+//            if (guardado) {
+//                response.sendRedirect("html/RegistroProducto.html?mensaje=exito");
+//            } else {
+//                response.sendRedirect("html/RegistroProducto.html?mensaje=error");
+//            }
+//        } catch (ExcepcionAT ex) {
+//            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
