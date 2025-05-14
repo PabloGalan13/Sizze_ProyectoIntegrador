@@ -111,6 +111,7 @@ public class RegistrarVenta extends HttpServlet {
 
             // 2. Obtener el vendedor (simplificado)
             Empleado vendedor = new EmpleadoNormal();
+            vendedor.setNombre("Jorge");
             vendedor.setId(jsonObject.getAsJsonObject("vendedor").get("id").getAsLong());
             venta.setVendedor(vendedor);
             // 3. Procesar los productos
