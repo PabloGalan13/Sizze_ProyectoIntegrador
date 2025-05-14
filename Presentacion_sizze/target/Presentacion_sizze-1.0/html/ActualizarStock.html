@@ -27,23 +27,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div id="contenedorProductos">
             </div>
         </main>
-        <!-- Modal de edición -->
+        <!-- Modal de edición (actualizado) -->
         <div id="modalProducto" class="modal hidden">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <img id="modalImg" src="" alt="Producto">
-                <h3 id="modalNombre"></h3>
-                <p id="modalDesc"></p>
+
+
+                <img id="modalImg" src="" alt="Producto" style="max-width: 100px; margin-top: 10px;">
+                <br>
+                <label style="margin-top: 10px;">Nombre:</label>
+                <br>
+                <input type="text" id="modalNombreInput">
+                <br>
+                <label style="margin-top: 10px;">Descripción:</label>
+                <textarea id="modalDescInput" style="width: 399px; height: 120px;"></textarea>
 
                 <div class="cantidad-control">
                     <button id="btnRestar" class="boton-pastel">-</button>
                     <span id="cantidad">0</span>
                     <button id="btnSumar" class="boton-pastel">+</button>
                 </div>
+                <div class="imagen-input-wrapper">
+                    <label>Imagen:</label>
+                    <input type="file" id="modalInputImg" accept="image/*">
+                </div>
 
-                <button id="btnActualizar" class="boton-pastel">Actualizar</button>
+                <button id="btnActualizar" class="boton-pastel" style="margin-top: 20px;">Actualizar</button>
             </div>
         </div>
+
 
         <!-- Modal de confirmación -->
         <div id="modalConfirmacion" class="modal hidden">

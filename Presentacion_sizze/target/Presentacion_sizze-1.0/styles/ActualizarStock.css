@@ -198,3 +198,11 @@ h2 {
     opacity: 0.8;
 }
 
+#modalInputImg {
+    margin-top: 10px;
+}
+
+.modal-content .imagen-input-wrapper {
+    margin-top: 15px;
+}
+

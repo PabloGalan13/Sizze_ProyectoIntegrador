@@ -10,10 +10,14 @@ import excepciones.ExcepcionAT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +26,11 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 @WebServlet(name = "ActualizarStockServlet", urlPatterns = {"/ActualizarStockServlet"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB antes de escribir en disco
+        maxFileSize = 1024 * 1024 * 10, // Tamaño máximo de archivo 10MB
+        maxRequestSize = 1024 * 1024 * 50 // Tamaño máximo de la petición 50MB
+)
 public class ActualizarStockServlet extends HttpServlet {
 
     /**
@@ -76,32 +85,56 @@ public class ActualizarStockServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        try {
+       try {
+            // Obtener parámetros
             Long idProducto = Long.parseLong(request.getParameter("idProducto"));
-            int nuevoStock = Integer.parseInt(request.getParameter("nuevoStock"));
+            String nuevoNombre = request.getParameter("nombre");
+            String nuevaDescripcion = request.getParameter("descripcion");
+            int nuevoStock = Integer.parseInt(request.getParameter("stock"));
 
             ProductoDAO productoDAO = new ProductoDAO();
             Producto producto = productoDAO.obtenerProductoPorId(idProducto);
 
             if (producto == null) {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                response.getWriter().write("{\"error\":\"Producto no encontrado\"}");
+                response.sendRedirect("html/ActualizarStock.html?mensaje=producto_no_encontrado");
                 return;
             }
 
+            // Actualizar datos
+            producto.setNombre(nuevoNombre);
+            producto.setDescripcion(nuevaDescripcion);
             producto.setStock(nuevoStock);
+
+            // Procesar imagen si se subió una
+            Part filePart = request.getPart("imgPortada");
+            if (filePart != null && filePart.getSize() > 0) {
+                String fileName = filePart.getSubmittedFileName();
+                String uniqueFileName = UUID.randomUUID().toString() + "_" + fileName;
+
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "postImgs";
+
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
+
+                String filePath = uploadPath + File.separator + uniqueFileName;
+                filePart.write(filePath);
+
+                String imagen = "postImgs/" + uniqueFileName;
+                producto.setImagen(imagen); // Asegúrate de tener este campo y setter
+            }
+
+            // Guardar cambios
             productoDAO.actualizarProducto(producto);
 
-            response.getWriter().write("{\"mensaje\":\"Stock actualizado correctamente\"}");
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("{\"error\":\"Error al actualizar: " + e.getMessage() + "\"}");
+            response.sendRedirect("html/ActualizarStock.html?mensaje=exito");
+
+        } catch (ExcepcionAT | NumberFormatException | IOException | ServletException ex) {
+            Logger.getLogger(ActualizarStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("html/ActualizarStock.html?mensaje=error");
         }
     }
-
     /**
      * Returns a short description of the servlet.
      *
