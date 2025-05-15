@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Producto</title>
+    <link rel="stylesheet" href="../styles/EliminarProducto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Contenedores para insertar dinámicamente header y sidebar -->
+        <div id="header-container"></div>
+        <div id="sidebar-container"></div>
+        <div id="overlay" class="overlay hidden"></div>
+    
+    <div class="container-eliminar">
+        <h2 class="titulo-eliminar">Eliminar Producto</h2>
+        
+        <div class="busqueda-eliminar">
+            <label for="nombreProducto">Nombre del Producto:</label>
+            <div class="busqueda-input-eliminar">
+                <input type="text" id="nombreProducto" placeholder="Ingrese nombre del producto">
+                <button id="btnBuscar">Buscar</button>
+            </div>
+        </div>
+        
+        <div id="resultadosBusqueda" class="mensaje-eliminar hidden"></div>
+        
+        <div id="productoEncontrado" style="display:none;">
+            <h3>¿Eliminar este producto permanentemente?</h3>
+            <div id="detalleProducto"></div>
+            <button id="btnEliminar" class="btn-eliminar">Confirmar Eliminación</button>
+        </div>
+
+        <!-- Mensajes de feedback -->
+        <div id="mensajeExito" class="mensaje-eliminar mensaje-exito hidden"></div>
+        <div id="mensajeError" class="mensaje-eliminar mensaje-error hidden"></div>
+    </div>
+    <script src="../javascript/layout.js" defer></script>
+    <script src="../javascript/EliminarProducto.js"></script>
+</body>
+</html>

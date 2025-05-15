@@ -1,0 +1,345 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    min-height: 100vh;
+    color: #333;
+    padding: 20px;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Contenedor principal */
+.container-eliminar {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Títulos */
+.titulo-eliminar {
+    color: #5a2d4e;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    border-bottom: 2px solid #ff99cc;
+    padding-bottom: 10px;
+}
+
+/* Formulario de búsqueda */
+.busqueda-eliminar {
+    margin-bottom: 30px;
+}
+
+.busqueda-eliminar label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5a2d4e;
+}
+
+.busqueda-input-eliminar {
+    display: flex;
+    gap: 10px;
+}
+
+#nombreProducto {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+#nombreProducto:focus {
+    border-color: #ff99cc;
+    outline: none;
+}
+
+#btnBuscar {
+    background: linear-gradient(to right, #ff99cc, #ff6699);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#btnBuscar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Resultados de búsqueda */
+#resultadosBusqueda {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #ff99cc;
+}
+
+/* Producto encontrado */
+#productoEncontrado {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff8fa;
+    border-radius: 10px;
+    border: 1px solid #ffd6e7;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#detalleProducto p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+#detalleProducto strong {
+    color: #5a2d4e;
+}
+
+/* Botón de eliminar */
+.btn-eliminar {
+    background: linear-gradient(to right, #ff4444, #cc0000);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-eliminar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+/* Mensajes */
+.mensaje-eliminar {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.mensaje-error {
+    background-color: #ffebee;
+    border-left: 4px solid #ff4444;
+    color: #cc0000;
+}
+
+.mensaje-exito {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container-eliminar {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .busqueda-input-eliminar {
+        flex-direction: column;
+    }
+    
+    #btnBuscar {
+        width: 100%;
+    }
+}
+
+/* Clase para manejar visibilidad */
+.hidden {
+    display: none !important;
+}
+
+/* Ajustes adicionales para el layout */
+.busqueda-input-eliminar input {
+    flex: 1;
+    min-width: 0; /* Evita problemas de overflow en flex */
+}
+
+#btnBuscar {
+    white-space: nowrap; /* Evita que el texto del botón se rompa */
+}
+
+#detalleProducto {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    padding-top: 20px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100px;
+    margin-bottom: 15px;
+}
+/* Mostrar sidebar */
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #eee;
+}
+
+.cerrar-sidebar {
+    text-align: right;
+    padding: 0 20px;
+}
+
+.cerrar-sidebar i {
+    font-size: 22px;
+    cursor: pointer;
+    color: #444;
+}
+
+/* Overlay oscuro para cerrar al hacer clic fuera */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ocultar elementos por defecto */
+.hidden {
+    display: none;
+}
+.sidebar ul li a.activo {
+    font-weight: bold;
+    color: #81486c; /* puedes cambiarlo según tu diseño */
+    text-decoration: underline;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.menu:hover {
+    color: #81486c;
+    transform: scale(1.2);
+}
+
+
+h1 {
+    margin: 0; /* Asegura que no haya margen extra */
+    padding-left: 10px; /* Espacio entre el menú y el título */
+    flex-grow: 1; /* Esto permite que el título ocupe el espacio restante */
+}
+

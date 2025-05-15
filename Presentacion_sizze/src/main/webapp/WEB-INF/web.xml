@@ -8,6 +8,10 @@
         <servlet-name>RegistrarVenta</servlet-name>
         <servlet-class>itson.edu.mx.Servlets.RegistrarVenta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EliminarProducto</servlet-name>
+        <servlet-class>itson.edu.mx.Servlets.EliminarProducto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuscarProducto</servlet-name>
         <url-pattern>/BuscarProducto</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>RegistrarVenta</servlet-name>
         <url-pattern>/RegistrarVenta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarProducto</servlet-name>
+        <url-pattern>/EliminarProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
