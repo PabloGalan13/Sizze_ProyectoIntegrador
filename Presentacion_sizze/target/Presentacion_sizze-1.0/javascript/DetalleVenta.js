@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         alert("ID de venta no proporcionado");
     }
+    document.querySelector('.btn.regresar').addEventListener('click', function () {
+        window.location.href = `${BASE_URL}/html/ConsultarVentas.html`;
+    });
 });
 
 function obtenerIdVentaDesdeURL() {
@@ -26,10 +29,11 @@ async function consultarVentaPorId(idVenta) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ idVenta })
+            body: JSON.stringify({idVenta})
         });
 
-        if (!response.ok) throw new Error('Error al consultar la venta');
+        if (!response.ok)
+            throw new Error('Error al consultar la venta');
 
         const venta = await response.json();
         llenarFormularioVenta(venta);
@@ -49,7 +53,7 @@ function llenarFormularioVenta(venta) {
 
     // Llenar la tabla de productos
     const contenedorTabla = document.querySelector('.tabla-productos');
-    
+
     // Eliminar filas anteriores (excepto encabezado)
     const filas = contenedorTabla.querySelectorAll('.fila:not(.encabezado)');
     filas.forEach(fila => fila.remove());

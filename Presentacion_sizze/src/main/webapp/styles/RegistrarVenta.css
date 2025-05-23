@@ -30,6 +30,7 @@ body {
 
 .venta, .productos {
     flex: 1 1 45%;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -126,6 +127,7 @@ input[type="number"] {
     padding-top: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 /* Sidebar */

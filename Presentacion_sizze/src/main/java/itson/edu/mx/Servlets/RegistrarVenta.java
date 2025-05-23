@@ -10,6 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import daos.EmpleadoNormalDAO;
 import entidades.Venta;
 import entidades.DetalleVenta;
 import entidades.Empleado;
@@ -50,19 +51,7 @@ public class RegistrarVenta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrarVenta</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistrarVenta at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        response.sendRedirect("html/RegistrarVenta.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,8 +99,9 @@ public class RegistrarVenta extends HttpServlet {
             venta.setMetodoPago(MetodoPago.valueOf(jsonObject.get("metodoPago").getAsString()));
 
             // 2. Obtener el vendedor (simplificado)
-            Empleado vendedor = new EmpleadoNormal();
-            vendedor.setId(jsonObject.getAsJsonObject("vendedor").get("id").getAsLong());
+            EmpleadoNormalDAO empleadoDAO= new EmpleadoNormalDAO();
+            Empleado vendedor = empleadoDAO.obtenerEmpleadoNormal(1L);
+            vendedor.setId(vendedor.getId());
             venta.setVendedor(vendedor);
             // 3. Procesar los productos
             JsonArray productosArray = jsonObject.getAsJsonArray("productos");

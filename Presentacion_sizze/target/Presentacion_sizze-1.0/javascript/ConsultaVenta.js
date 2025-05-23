@@ -23,7 +23,7 @@ async function cargarTodasLasVentas() {
     try {
         const response = await fetch(`${BASE_URL}/ConsultarVentas`, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json'}
         });
 
         if (!response.ok) {
@@ -42,7 +42,6 @@ async function cargarTodasLasVentas() {
 
     } catch (error) {
         console.error('Error al cargar todas las ventas:', error);
-        mostrarMensajeError('Error en la comunicación con el servidor');
     }
 }
 
@@ -51,7 +50,6 @@ async function clickBotonBuscar() {
     const fechaFin = document.getElementById('fechaFin').value;
 
     if (!fechaInicio || !fechaFin) {
-        mostrarMensajeError('Por favor, seleccione ambas fechas.');
         return;
     }
 
@@ -61,18 +59,15 @@ async function clickBotonBuscar() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ fechaInicio, fechaFin })
+            body: JSON.stringify({fechaInicio, fechaFin})
         });
 
         if (!response.ok) {
             throw new Error('Error en la respuesta del servidor');
         }
-
         const data = await response.json();
-        ocultarMensajeError();
 
         if (!data || data.length === 0) {
-            mostrarMensajeError('Ventas no encontradas');
             document.getElementById('tablaVentas').innerHTML = '';
         } else {
             actualizarTabla(data);
@@ -80,7 +75,6 @@ async function clickBotonBuscar() {
 
     } catch (error) {
         console.error('Error al buscar ventas:', error);
-        mostrarMensajeError('Error al buscar ventas. Por favor, intente nuevamente.');
     }
 }
 
@@ -96,13 +90,13 @@ function actualizarTabla(ventas) {
             <td>${venta.empleado}</td>
             <td>${venta.fecha}</td>
             <td>$${venta.total.toFixed(2)}</td>
-            <td><button class="btn btn-sm btn-info ver-detalle" data-id="${venta.id}">Ver Detalle</button></td>
+             <td class="no-print"><button class="btn detalle detalleBoton" data-id="${venta.id}">Ver Detalle</button></td>
         `;
 
-        tablaBody.appendChild(fila);  
+        tablaBody.appendChild(fila);
     });
 
-    tablaBody.querySelectorAll('.ver-detalle').forEach(boton => {
+    tablaBody.querySelectorAll('.detalleBoton').forEach(boton => {
         boton.addEventListener('click', function () {
             const idVenta = this.getAttribute('data-id');
             window.open(`${BASE_URL}/html/DetalleVenta.html?id=${idVenta}`, '_blank');
@@ -110,16 +104,6 @@ function actualizarTabla(ventas) {
     });
 }
 
-function mostrarMensajeError(mensaje) {
-    const alertaError = document.getElementById('mensajeError');
-    alertaError.textContent = mensaje;
-    alertaError.classList.remove('d-none');
-}
-
-function ocultarMensajeError() {
-    const alertaError = document.getElementById('mensajeError');
-    alertaError.classList.add('d-none');
-}
 
 function imprimirTabla() {
     const tablaHTML = document.querySelector('.table-responsive').innerHTML;
@@ -133,7 +117,8 @@ function imprimirTabla() {
                     body { font-family: Arial, sans-serif; padding: 20px; }
                     table { width: 100%; border-collapse: collapse; }
                     th, td { border: 1px solid #000; padding: 8px; text-align: left; }
-                    th { background-color: #f2f2f2; }
+                    th { background-color: #f2f2f   2; 
+                    .no-print { display: none; }
                 </style>
             </head>
             <body>
@@ -152,7 +137,7 @@ function imprimirTabla() {
 }
 
 function descargarPDF() {
-    const { jsPDF } = window.jspdf;
+    const {jsPDF} = window.jspdf;
     const doc = new jsPDF();
 
     doc.text('Reporte de Ventas', 14, 15);

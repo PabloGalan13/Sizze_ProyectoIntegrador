@@ -13,7 +13,8 @@ function actualizarListaProductos() {
         div.classList.add("producto-agregado");
         div.innerHTML = `
             <p><strong>${detalle.producto.nombre}</strong> - ${detalle.cantidad} x $${detalle.precioVendido.toFixed(2)}</p>
-            <button onclick="eliminarProducto(${index})">Eliminar</button>
+            <button class="boton-pastel" onclick="eliminarProducto(${index})">Eliminar</button>
+            
         `;
         contenedor.appendChild(div);
     });
@@ -33,7 +34,7 @@ document.getElementById("btnBuscar").addEventListener("click", async () => {
     try {
         const response = await fetch(`${BASE_URL}/BuscarProducto`, {
             method: "POST",
-            headers: { 
+            headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "application/json"
             },
@@ -58,9 +59,14 @@ document.getElementById("btnBuscar").addEventListener("click", async () => {
             resultadosBusqueda.innerText = "Producto no encontrado.";
         } else {
             resultadosBusqueda.innerHTML = `
-                <p><strong>Nombre:</strong> ${producto.nombre}</p>
-                <p><strong>Precio:</strong> $${producto.precio.toFixed(2)}</p>
-                <p><strong>Stock:</strong> ${producto.stock}</p>
+            <div style="display: flex; align-items: flex-start; gap: 20px; margin-top: 15px;">
+    <img src="${BASE_URL}/${producto.imagen}" alt="Imagen del producto" style="width: 150px; height: auto; object-fit: contain; border: 1px solid #ccc; padding: 5px;">
+
+    <div>
+        <p><strong>Nombre:</strong> ${producto.nombre}</p>
+        <p><strong>Precio:</strong> $${producto.precio.toFixed(2)}</p>
+        <p><strong>Stock:</strong> ${producto.stock}</p>
+    </div>
             `;
             sessionStorage.setItem("productoSeleccionado", JSON.stringify(producto));
         }
@@ -137,13 +143,13 @@ document.getElementById("pagar").addEventListener("click", async () => {
     }
 
     const venta = {
-        vendedor: { id: 2 }, 
+        vendedor: {id: 2},
         metodoPago: metodoPago,
         productos: productosAgregados.map(item => ({
-            productoId: item.producto.id,
-            cantidad: item.cantidad,
-            precioUnitario: item.precioVendido
-        }))
+                productoId: item.producto.id,
+                cantidad: item.cantidad,
+                precioUnitario: item.precioVendido
+            }))
     };
 
     try {

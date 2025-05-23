@@ -41,15 +41,14 @@ async function cargarTodosProductos() {
 
     } catch (error) {
         console.error('Error al realizar la petición:', error);
-        mostrarMensajeError('Error en la comunicación con el servidor');
     }
 }
 
 async function clickBotonBuscar() {
     const nombreProducto = document.getElementById('busquedaProducto').value.trim();
 
-    if (!nombreProducto) {
-        mostrarMensajeError('Por favor, ingrese un nombre de producto para buscar.');
+    if (nombreProducto=="") {
+        cargarTodosProductos();
         return;
     }
 
@@ -67,10 +66,8 @@ async function clickBotonBuscar() {
         }
 
         const data = await response.json();
-        ocultarMensajeError();
 
         if (!data || data.length === 0) {
-            mostrarMensajeError('Productos no encontrados');
             document.getElementById('tablaProductos').innerHTML = '';
         } else {
             actualizarTabla(data);
@@ -78,7 +75,6 @@ async function clickBotonBuscar() {
 
     } catch (error) {
         console.error('Error al buscar productos:', error);
-        mostrarMensajeError('Error al buscar productos. Por favor, intente nuevamente.');
     }
 }
 
@@ -107,16 +103,7 @@ function actualizarTabla(productos) {
 }
 
 
-function mostrarMensajeError(mensaje) {
-    const alertaError = document.getElementById('mensajeError');
-    alertaError.textContent = mensaje;
-    alertaError.classList.remove('d-none');
-}
 
-function ocultarMensajeError() {
-    const alertaError = document.getElementById('mensajeError');
-    alertaError.classList.add('d-none');
-}
 
 function imprimirTabla() {
     const tablaHTML = document.querySelector('.table-responsive').innerHTML;

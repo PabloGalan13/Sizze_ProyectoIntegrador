@@ -11,9 +11,8 @@ body {
     font-family: 'Georgia', serif;
     background: linear-gradient(to right, #ffdd99, #ff99cc);
     margin: 0;
-    padding-top: 100px; /* Match con la altura del navbar */
     box-sizing: border-box;
-    height: 100vh;
+
 }
 
 .ConsultarVentas {
@@ -25,7 +24,7 @@ body {
     margin: 0 auto;
     box-sizing: border-box;
     padding-top: 80px; /* Match con la altura del navbar */
-    height: 85vh;
+    height: 95vh;
 }
 
 
@@ -111,7 +110,7 @@ table {
 
 th, td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -122,6 +121,8 @@ th {
 
 tr:nth-child(even) {
     background: #f9f9f9;
+        padding: 15px;
+
 }
 
 /* Botones */
@@ -144,6 +145,10 @@ tr:nth-child(even) {
     margin: 0 10px; /* Agrega margen entre botones */
 }
 
+.detalle{
+    background: linear-gradient(to right, #a0db8e, #48c78e);
+    margin-top: 5px;
+}
 .regresar {
     background: linear-gradient(to right, #ff99cc, #ffdd99);
 }
