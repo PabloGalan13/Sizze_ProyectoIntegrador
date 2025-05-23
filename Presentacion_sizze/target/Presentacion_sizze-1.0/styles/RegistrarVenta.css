@@ -191,7 +191,19 @@ input[type="number"] {
     transition: opacity 0.3s ease;
     z-index: 1000;
 }
+.boton-pastel {
+    padding: 10px 20px;
+    border: 2px ;
+    border-radius: 15px;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
 
+.boton-pastel:hover {
+    opacity: 0.8;
+}
 .overlay.visible {
     opacity: 1;
     visibility: visible;

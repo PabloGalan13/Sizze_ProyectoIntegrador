@@ -168,7 +168,7 @@ document.getElementById("pagar").addEventListener("click", async () => {
             productosAgregados = [];
             totalPago = 0;
             actualizarListaProductos();
-            document.getElementById("formVenta").reset();
+//            document.getElementById("formVenta").reset();
         } else {
             alert(`Error al registrar venta: ${resultado.mensaje || 'Error desconocido'}`);
         }

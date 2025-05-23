@@ -1,26 +1,11 @@
 /* Estilos generales */
 body {
     margin: 0;
+    padding-top: 80px; /* Espacio si hay header fijo */
     font-family: 'Georgia', serif;
     background: linear-gradient(to right, #ffdd99, #ff99cc);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    min-height: 100vh;
-    color: #333;
-    padding: 20px;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 /* Contenedor principal */
 .container-eliminar {
@@ -86,6 +71,8 @@ body {
 
 #btnBuscar:hover {
     transform: translateY(-2px);
+        background: linear-gradient(to right, #ffdd99, #ff99cc);
+
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
@@ -109,8 +96,38 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.botones-modal {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-modal.confirmar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-modal.cancelar {
+    background-color: #bdc3c7;
+    color: black;
 }
 
 #detalleProducto p {
@@ -168,11 +185,11 @@ body {
         padding: 20px;
         margin: 20px;
     }
-    
+
     .busqueda-input-eliminar {
         flex-direction: column;
     }
-    
+
     #btnBuscar {
         width: 100%;
     }

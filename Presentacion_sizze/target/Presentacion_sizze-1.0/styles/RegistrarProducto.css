@@ -174,6 +174,19 @@ button.cancelar:hover {
     display: none;
 }
 
+.boton-pastel {
+    padding: 10px 20px;
+    border: 2px ;
+    border-radius: 15px;
+    background: linear-gradient(to right, #ffdd99, #ff99cc);
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.boton-pastel:hover {
+    opacity: 0.8;
+}
 .modal-content {
     background-color: white;
     padding: 20px;

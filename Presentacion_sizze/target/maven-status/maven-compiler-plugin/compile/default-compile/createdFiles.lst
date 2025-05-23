@@ -1,4 +1,5 @@
 itson\edu\mx\utils\VentaDetalleDTO.class
+itson\edu\mx\Servlets\EliminarProducto.class
 itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.class
 itson\edu\mx\Servlets\DetalleVenta.class
 itson\edu\mx\Servlets\RegistrarVenta.class
