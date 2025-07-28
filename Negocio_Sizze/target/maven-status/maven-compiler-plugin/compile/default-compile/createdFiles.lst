@@ -1,4 +1,7 @@
 consultaVenta\ConsultaVentaBO.class
+registrarProducto\RegistrarProductoBO.class
+consultaProducto\ConsultaProductoBO.class
+consultarCategoria\ConsultarCategoriaBO.class
 consultaInventario\ConsultaInventarioBO.class
 eliminarProducto\EliminarProductoBO.class
 registrarVenta\RegistrarVentaBO.class

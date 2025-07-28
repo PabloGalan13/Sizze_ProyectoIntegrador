@@ -1,14 +1,15 @@
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\VentaDetalleDTO.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\ProductoDTO.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\BuscarProducto.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\presenntacion_sizze\resources\JakartaEE91Resource.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ActualizarStockServlet.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\EliminarProducto.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ProductoServlet.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\VentaDTO.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\DetalleVenta.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\GsonUtils.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ConsultaInventario.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\RegistrarVenta.java
-C:\Users\USER\Documents\ITSON\Trabajos ITSON\Sexto Semestre\Proyecto Integrador\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ConsultarVentas.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\BuscarProducto.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\GsonUtils.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\presenntacion_sizze\JakartaRestConfiguration.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\RegistrarVenta.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ConsultarVentas.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\VentaDetalleDTO.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\presenntacion_sizze\resources\JakartaEE91Resource.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\ProductoDTO.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\DetalleVenta.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\EliminarProducto.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ImagenServlet.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ProductoServlet.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\utils\VentaDTO.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ActualizarStockServlet.java
+C:\Users\Gabriel\OneDrive\Desktop\Sizze_ProyectoIntegrador\Presentacion_sizze\src\main\java\itson\edu\mx\Servlets\ConsultaInventario.java

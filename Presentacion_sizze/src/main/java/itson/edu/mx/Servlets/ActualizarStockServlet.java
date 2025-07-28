@@ -4,6 +4,7 @@
  */
 package itson.edu.mx.Servlets;
 
+import consultaProducto.ConsultaProductoBO;
 import daos.ProductoDAO;
 import entidades.Producto;
 import excepciones.ExcepcionAT;
@@ -92,8 +93,8 @@ public class ActualizarStockServlet extends HttpServlet {
             String nuevaDescripcion = request.getParameter("descripcion");
             int nuevoStock = Integer.parseInt(request.getParameter("stock"));
 
-            ProductoDAO productoDAO = new ProductoDAO();
-            Producto producto = productoDAO.obtenerProductoPorId(idProducto);
+            ConsultaProductoBO consultaProducto = new ConsultaProductoBO();
+            Producto producto = consultaProducto.obtenerProductoPorId(idProducto);
 
             if (producto == null) {
                 response.sendRedirect("html/ActualizarStock.html?mensaje=producto_no_encontrado");
@@ -126,7 +127,7 @@ public class ActualizarStockServlet extends HttpServlet {
             }
 
             // Guardar cambios
-            productoDAO.actualizarProducto(producto);
+            consultaProducto.actualizarProducto(producto);
 
             response.sendRedirect("html/ActualizarStock.html?mensaje=exito");
 

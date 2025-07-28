@@ -4,6 +4,7 @@
  */
 package itson.edu.mx.Servlets;
 
+import consultarCategoria.ConsultarCategoriaBO;
 import daos.CategoriaDAO;
 import daos.ProductoDAO;
 import entidades.Categoria;
@@ -22,6 +23,7 @@ import java.io.File;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import registrarProducto.RegistrarProductoBO;
 
 /**
  *
@@ -94,10 +96,10 @@ public class ProductoServlet extends HttpServlet {
             double precio = Double.parseDouble(request.getParameter("precio"));
             int stock = Integer.parseInt(request.getParameter("stock"));
             String categoriaNombre = request.getParameter("categoria");
+            
+            ConsultarCategoriaBO consCategoria = new ConsultarCategoriaBO();
+            Categoria categoria = consCategoria.obtenerCategoriaPorNombre(categoriaNombre);
 
-            Categoria categoria = new Categoria();
-            CategoriaDAO cate = new CategoriaDAO();
-            categoria = cate.obtenerCategoriaPorNombre(categoriaNombre);
             Part filePart = request.getPart("imgPortada");
             String fileName = filePart.getSubmittedFileName();
 
@@ -128,11 +130,10 @@ public class ProductoServlet extends HttpServlet {
             }
             // Guardar la ruta relativa para la base de datos
             String imagen = "postImgs/" + uniqueFileName;
-
             Producto producto = new Producto(nombre, descripcion, descripcion, precio, stock, categoria, tipo, imagen);
-            ProductoDAO productoDAO = new ProductoDAO();
 
-            boolean guardado = productoDAO.registrarProducto(producto);
+            RegistrarProductoBO registrar = new RegistrarProductoBO();
+            boolean guardado = registrar.registrarProducto(producto);
 
             if (guardado) {
                 response.sendRedirect("html/RegistroProducto.html?mensaje=exito");
