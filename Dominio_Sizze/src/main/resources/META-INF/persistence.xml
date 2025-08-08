@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <persistence-unit name="SizzePU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>entidades.Producto</class>
-        <class>entidades.Categoria</class>
-        <class>entidades.DetalleVenta</class>
-        <class>entidades.Venta</class>
-        <class>entidades.Devolucion</class>
-        <class>entidades.Gerente</class>
-        <class>entidades.Empleado</class>
-        <class>entidades.EmpleadoNormal</class>
-        <class>entidades.Horario</class>
-        <class>entidades.Reporte</class>
-        <class>entidades.ReporteVenta</class>
-        <class>entidades.DetalleDevolucion</class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sizze?serverTimezone=UTC"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="1233"/>
-            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            <property name="eclipselink.target-database" value="MySQL"/>
-            <property name="eclipselink.logging.level" value="FINE"/>
-            <property name="jakarta.persistence.transaction-type" value="RESOURCE_LOCAL"/>
-        </properties>
-    </persistence-unit>
+  <persistence-unit name="SizzePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entidades.Producto</class>
+    <class>entidades.Categoria</class>
+    <class>entidades.DetalleVenta</class>
+    <class>entidades.Venta</class>
+    <class>entidades.Devolucion</class>
+    <class>entidades.Gerente</class>
+    <class>entidades.Empleado</class>
+    <class>entidades.EmpleadoNormal</class>
+    <class>entidades.Horario</class>
+    <class>entidades.Reporte</class>
+    <class>entidades.ReporteVenta</class>
+    <class>entidades.DetalleDevolucion</class>
+    <class>entidades.Descuentos</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sizze?serverTimezone=UTC"/>
+      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.password" value="12344"/>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+      <property name="eclipselink.target-database" value="MySQL"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="jakarta.persistence.transaction-type" value="RESOURCE_LOCAL"/>
+    </properties>
+  </persistence-unit>
 </persistence>
