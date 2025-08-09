@@ -9,20 +9,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.Table;
+import java.io.Serializable;
 
 /**
  *
  * @author yohan
  */
-    @Entity
+@Entity
+@Table(name = "Descuentos")
 
-public class Descuentos {
+public class Descuentos implements Serializable{
 
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "codigo")
     private String Codigo;
     @Column(name = "descuento")
@@ -31,8 +33,8 @@ public class Descuentos {
     public Descuentos() {
     }
 
-    public Descuentos( String Codigo, Float Descuento) {
-       
+    public Descuentos(String Codigo, Float Descuento) {
+
         this.Codigo = Codigo;
         this.Descuento = Descuento;
     }
@@ -61,5 +63,4 @@ public class Descuentos {
         this.Descuento = Descuento;
     }
 
-  
 }
