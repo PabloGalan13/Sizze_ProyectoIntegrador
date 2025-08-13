@@ -8,4 +8,5 @@ registrarVenta\RegistrarVentaBO.class
 eliminarProducto\IEliminarProductoBO.class
 registrarVenta\IRegistrarVentaBO.class
 itson\edu\mx\negocio_sizze\Negocio_Sizze.class
+consultaDescuentos.class
 excepciones\NegocioException.class

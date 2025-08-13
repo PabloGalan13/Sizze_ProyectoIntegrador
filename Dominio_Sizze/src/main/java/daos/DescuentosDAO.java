@@ -5,7 +5,6 @@
 package daos;
 
 import entidades.Descuentos;
-import entidades.Producto;
 import excepciones.ExcepcionAT;
 import interfacesDAO.IDescuentoDAO;
 import jakarta.persistence.EntityManager;
