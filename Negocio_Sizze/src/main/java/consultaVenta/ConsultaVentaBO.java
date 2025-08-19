@@ -4,6 +4,7 @@
  */
 package consultaVenta;
 
+import daos.DetalleVentaDAO;
 import daos.VentaDAO;
 import entidades.Venta;
 import excepciones.ExcepcionAT;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 public class ConsultaVentaBO {
 
     private final VentaDAO ventaDAO = new VentaDAO();
+    
+    private final DetalleVentaDAO detalleVentaDAO = new DetalleVentaDAO();
 
     public List<Venta> obtenerTodasLasVentas() throws Exception {
         try {
@@ -34,4 +37,12 @@ public class ConsultaVentaBO {
         return ventaDAO.obtenerVentaPorId(idVenta);
     }
 
+    public List<Object[]> obtenerProductosMasVendidos(LocalDate inicio, LocalDate fin) throws Exception {
+        try {
+            return detalleVentaDAO.obtenerProductosMasVendidos(inicio, fin);
+        } catch (ExcepcionAT ex) {
+            Logger.getLogger(ConsultaVentaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new Exception("Error al consultar productos más vendidos: " + ex.getMessage());
+        }
+    }
 }

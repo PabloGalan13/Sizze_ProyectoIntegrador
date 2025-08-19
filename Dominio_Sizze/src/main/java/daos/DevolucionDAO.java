@@ -1,8 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package daos;
 
-import entidades.Venta;
+import entidades.Devolucion;
 import excepciones.ExcepcionAT;
-import interfacesDAO.IVentaDAO;
+import interfacesDAO.IDevolucionDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -10,27 +14,31 @@ import jakarta.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
 
-public class VentaDAO implements IVentaDAO {
+/**
+ *
+ * @author Gabriel
+ */
+public class DevolucionDAO implements IDevolucionDAO {
 
     private final EntityManagerFactory emf;
 
-    public VentaDAO() {
+    public DevolucionDAO() {
         emf = Persistence.createEntityManagerFactory("SizzePU");
     }
 
     @Override
-    public void registrarVenta(Venta venta) throws ExcepcionAT {
+    public void registrarDevolucion(Devolucion devolucion) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            em.persist(venta);
+            em.persist(devolucion);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new ExcepcionAT("Error al registrar venta", e);
+            throw new ExcepcionAT("Error al registrar devolución", e);
         } finally {
             if (em != null) {
                 em.close();
@@ -39,18 +47,18 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public void actualizarVenta(Venta venta) throws ExcepcionAT {
+    public void actualizarDevolucion(Devolucion devolucion) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            em.merge(venta);
+            em.merge(devolucion);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new ExcepcionAT("Error al actualizar venta", e);
+            throw new ExcepcionAT("Error al actualizar devolución", e);
         } finally {
             if (em != null) {
                 em.close();
@@ -59,19 +67,19 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public void eliminarVenta(Venta venta) throws ExcepcionAT {
+    public void eliminarDevolucion(Devolucion devolucion) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            venta = em.merge(venta);
-            em.remove(venta);
+            devolucion = em.merge(devolucion);
+            em.remove(devolucion);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new ExcepcionAT("Error al eliminar venta", e);
+            throw new ExcepcionAT("Error al eliminar devolución", e);
         } finally {
             if (em != null) {
                 em.close();
@@ -80,13 +88,13 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public Venta obtenerVentaPorId(Long id) throws ExcepcionAT {
+    public Devolucion obtenerDevolucionPorId(Long id) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
-            return em.find(Venta.class, id);
+            return em.find(Devolucion.class, id);
         } catch (Exception e) {
-            throw new ExcepcionAT("Error al obtener venta por ID", e);
+            throw new ExcepcionAT("Error al obtener devolución por ID", e);
         } finally {
             if (em != null) {
                 em.close();
@@ -95,36 +103,39 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<Venta> obtenerVentas() throws ExcepcionAT {
+    public List<Devolucion> obtenerDevoluciones() throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
-            String jpql = "SELECT v FROM Venta v";
-            TypedQuery<Venta> query = em.createQuery(jpql, Venta.class);
+            String jpql = "SELECT d FROM Devolucion d";
+            TypedQuery<Devolucion> query = em.createQuery(jpql, Devolucion.class);
             return query.getResultList();
         } catch (Exception e) {
-            throw new ExcepcionAT("Error al obtener ventas", e);
+            throw new ExcepcionAT("Error al obtener devoluciones", e);
         } finally {
             if (em != null) {
                 em.close();
             }
         }
     }
+
     @Override
-    public List<Venta> obtenerPorRangoFechas(LocalDate inicio, LocalDate fin) {
+    public List<Devolucion> obtenerDevolucionesPorRangoFechas(LocalDate inicio, LocalDate fin) throws ExcepcionAT {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
-            TypedQuery<Venta> query = em.createQuery(
-                    "SELECT v FROM Venta v WHERE v.fecha BETWEEN :inicio AND :fin", Venta.class);
+            String jpql = "SELECT d FROM Devolucion d WHERE d.fecha BETWEEN :inicio AND :fin";
+            TypedQuery<Devolucion> query = em.createQuery(jpql, Devolucion.class);
             query.setParameter("inicio", inicio);
             query.setParameter("fin", fin);
             return query.getResultList();
+        } catch (Exception e) {
+            throw new ExcepcionAT("Error al obtener devoluciones por rango de fechas", e);
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
-
-   
-
 }
+
